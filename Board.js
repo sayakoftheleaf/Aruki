@@ -43,8 +43,10 @@ function create_board() {
 };
 
 
-/* 	FUNCTION PURPOSE - Initializes the board with the starting position
- 	of the pieces 	*/
+/* 	
+	FUNCTION PURPOSE - Initializes the board with the starting position
+ 	of the pieces
+*/
 
 function init_board() {
 	//Rooks
