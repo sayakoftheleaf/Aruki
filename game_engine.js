@@ -133,19 +133,6 @@ function withinBoard(someRow, someCol) {
 	}
 };
 
-/* 	FUNCTION PURPOSE - Checks if the square in which the piece is trying to move to is 
-	occupied by a piece of the same side
-
-	FUNCTION STATUS - Probably bug free. UNTESTED.	
-*/
-
-function isNotBlockedSquare (r, c, tempr, tempc) {
-
-	var flag;
-	row[r][c].player === row[tempr][tempc].player ? flag = false : flag = true;
-
-	return flag;
-};
 
 /*	
 	FUNCTION PURPOSE -  Finds the position of a piece of a side and

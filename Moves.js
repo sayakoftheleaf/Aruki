@@ -1,8 +1,36 @@
+/*
+	Module - Moves
+	Purpose - Calculates potential moves of a piece given the state of a board
+	Last Updated - 17th October, 2017
+
+	Things that need to be implemented:
+
+	Tested Functions:
+
+	Untested Functions:
+*/
+
+
+
+/* 	FUNCTION PURPOSE - Checks if the square in which the piece is trying to move to is 
+	occupied by a piece of the same side
+
+	FUNCTION STATUS - Probably bug free. UNTESTED.	
+*/
+
+function isNotBlockedSquare (r, c, tempr, tempc) {
+
+	var flag;
+	row[r][c].player === row[tempr][tempc].player ? flag = false : flag = true;
+
+	return flag;
+};
+
 function computeMoves( symb, r, c, shouldCheck){
 
 	var tempSquares = [];
 	if (symb === "K"){
-		tempSquares = tempSquares.concat(computeKingMoves(r, c, shouldCheck));
+		tempSquares = computeKingMoves(r, c, shouldCheck);
 		
 	}
 

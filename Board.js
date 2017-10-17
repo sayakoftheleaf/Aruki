@@ -63,9 +63,10 @@ function init_board() {
 	
 	//Lances
 	row[0][2].symbol = "L\t";
-	row[0][9].ssymbol = "L\t";
-	row[11][2].symbol = "L\t";
+	row[0][9].symbol = "L\t";
 	row[11][9].symbol = "L\t";
+	row[11][2].symbol = "L\t";
+	
 
 	//Pikes
 	row[0][3].symbol = "P\t";
@@ -102,36 +103,4 @@ function init_board() {
 		row[10][i].player = 1;
 		row[11][i].player = 1;
 	}
-};
-
-// Prints the current state of the board to the screen
-// Does not affect the values of the board passed
-function print_board(tempBoard){
-	//console.log("here");
-	var str = "";
-
-	for(var i = 0; i <= 11; i++)
-	{
-		for(var j = 0; j <= 11; j++)
-		{
-			str += tempBoard[i][j].symbol;
-		}
-		str += "\n";
-	}
-	console.log (str);
-};
-
-
-function gameEngine(){
-
-	create_board();
-	init_board();
-
-	print_board (row);
-
-};
-
-window.onload = function(){
-
-	gameEngine();
 };
