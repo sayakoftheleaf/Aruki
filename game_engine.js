@@ -76,23 +76,6 @@ function isValidMove(symb, r, c, dr, dc, shouldCheck){
 };
 
 
-/* 	FUNCTION PURPOSE - Deep copies a Board into a new Array
-
-	FUNCTION STATUS - Copied Logic from StackOverflow so should work. UNTESTED.
-*/
-
-function copyBoard (originalBoard){
-
-	var newBoard = [];
-
-	for (a = 0; a < originalBoard.length; a++){
-
-		newBoard[a] = originalBoard[a].splice();
-	}
-
-	return newBoard;
-};
-
 /*	TODO : Figure out how to do evolutions*/
 function isValidEvolution(){};
 
@@ -121,16 +104,19 @@ function checkForCheck(tempBoard, player){
 
 /* 	FUNCTION PURPOSE - Finds out if the move is within the board
 
-	FUNCTION STATUS - Probably bug free. UNTESTED.	
+	FUNCTION STATUS - WORKING AS INTENDED
 */
 function withinBoard(someRow, someCol) {
+
+	console.log ("Here");
 
 	if ((someRow <= 11) && (someRow >= 0)) {
 		if ((someCol <= 11) && (someCol >= 0)) {
 			return true;
 		}
 		return false;
-	}
+	} else
+		return false;
 };
 
 
@@ -138,7 +124,9 @@ function withinBoard(someRow, someCol) {
 	FUNCTION PURPOSE -  Finds the position of a piece of a side and
 			returns an object comprised of the row and column.
 
-	FUNCTION STATUS - COMPLETELY UNTESTED. MAY BE FILLED WITH BUGS.
+	RETURNTYPE : OBJECT
+
+	FUNCTION STATUS - WORKING AS INTENDED.
 */
 function positionOf( symb, someBoard, player) {
 
@@ -149,7 +137,7 @@ function positionOf( symb, someBoard, player) {
 	for ( var a = 0; a <= 11; a++) {
 		for (var b = 0; b <= 11; b++) {
 			
-			if ( symb === someBoard[a][b] && player === someBoard[a][b].player){
+			if ( symb === someBoard[a][b].symbol && player === someBoard[a][b].player){
 
 				tempSq.row = a;
 				tempSq.col = b;

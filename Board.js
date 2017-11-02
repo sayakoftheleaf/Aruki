@@ -1,3 +1,5 @@
+console.log("Inside Board.js");
+
 var row = [];
 
 /*	
@@ -22,12 +24,11 @@ var square = function(){};
 square.prototype.player = 0;
 square.prototype.symbol = "#\t";
 
-
 /* 
 	FUNCTION PURPOSE - creates the initial empty board
 */
 
-function create_board() {
+function create_board(board) {
 	
 	for(var i = 0; i <= 11; i++)
 	{
@@ -37,7 +38,7 @@ function create_board() {
 			col[j] = new square;
 		}
 
-	row[i] = col;
+	board[i] = col;
 	}
 
 };
@@ -98,9 +99,35 @@ function init_board() {
 		row[10][i].symbol = "Z\t";
 
 		//aligning initial pieces to the players they belong to
-		row[1][i].player = 2;
-		row[0][i].player = 2;
-		row[10][i].player = 1;
-		row[11][i].player = 1;
+		row[1][i].player = 1;
+		row[0][i].player = 1;
+		row[10][i].player = 2;
+		row[11][i].player = 2;
 	}
 };
+
+/* 	FUNCTION PURPOSE - Deep copies a Board into a new Array
+
+	FUNCTION STATUS - Copied Logic from StackOverflow so should work. UNTESTED.
+*/
+
+function copy_board(originalBoard) {
+	
+	//console.log(originalBoard);
+
+	var newBoard = [];
+	for(var i = 0; i <= 11; i++)
+	{
+		var tempcol = [];
+		for(var j = 0; j <= 11; j++)
+		{
+			tempcol[j] = originalBoard[i][j];
+		}
+
+	newBoard[i] = tempcol;
+	}
+
+	return newBoard;
+};
+
+
