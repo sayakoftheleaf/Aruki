@@ -27,9 +27,9 @@ Every player begins with 24 pieces:
 
 - 2 Pikes - Can move one square along the diagonals
 
-- 1 Lesser River - Can move one square in any direction. (Suicidal piece - Can be used once to eliminate all the pieces along the diagonal it's at, for both sides. Therefore, it is ileegal to have the King along a diagonal that the opponent's Lesser River is at, no matter at which stage of the game and no matter how many pieces are in between.)
+- 1 Lesser River - Can move one square in any direction. (Suicidal piece - Can be used once to eliminate all the pieces along the diagonal it's at, for both sides. Therefore, it is illegal to have the King along a diagonal that the opponent's Lesser River is at, no matter at which stage of the game and no matter how many pieces are in between.)
 
-- 1 Greater River - Can move one square in any direction. (Suicidal piece - Can be used once to eliminate all the pieces along the row or column it's at, for both sides. Therefore, it is ileegal to have the King along the row or column the opponent's Lesser River is at, no matter at which stage of the game and no matter how many pieces are in between.)
+- 1 Greater River - Can move one square in any direction. (Suicidal piece - Can be used once to eliminate all the pieces along the row or column it's at, for both sides. Therefore, it is illegal to have the King along the row or column the opponent's Lesser River is at, no matter at which stage of the game and no matter how many pieces are in between.)
 
 # Evolved Pieces :
 
