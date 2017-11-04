@@ -9,7 +9,7 @@ Copyright - Sayak Chatterjee, 2016
 Recent Update - 17th Octobor, 2017 - Still in Development phase
 
 
-# Pieces and Movements :
+## Pieces and Movements :
 
 Every player begins with 24 pieces:
 
@@ -31,7 +31,7 @@ Every player begins with 24 pieces:
 
 - 1 Greater River - Can move one square in any direction. (Suicidal piece - Can be used once to eliminate all the pieces along the row or column it's at, for both sides. Therefore, it is illegal to have the King along the row or column the opponent's Lesser River is at, no matter at which stage of the game and no matter how many pieces are in between.)
 
-# Evolved Pieces :
+### Evolved Pieces :
 
 Once you capture an opponent's piece, you can use it to evolve one of your own pieces.
 
@@ -47,7 +47,7 @@ Once you capture an opponent's piece, you can use it to evolve one of your own p
 
 - Javelin - Moves one or two squares along the column in any direction (Evolves from 2 pawns)
 
-# Promotions
+### Promotions
 
 You can promote pawns (or javelins) to a tier 1, a tier 2 or a tier 3 piece depending on whether they reached the 10th row, 11th row or the 12th row respectively.
 
@@ -58,12 +58,12 @@ You can promote pawns (or javelins) to a tier 1, a tier 2 or a tier 3 piece depe
 - Tier 3 pieces (Can be forged at the 12th row): Rook, Arrow, Minister
 
 
-# Last implemented : 
+## Last implemented : 
 - Separated the Module that only handled moves from the game engine
 - Tested withinBoard, findPositionOf and copyBoard
 
 
-TODO: 
+## TODO: 
 
 - Write checkforCheck
 
@@ -71,7 +71,7 @@ TODO:
 - Create a document with the actual rules of the game for ease
 - Implement User interactivity
 
-Update Fixes:
+## Update Fixes:
 
-Known Issues:
+## Known Issues:
 

@@ -27,7 +27,9 @@ function init_pieces(){
 /*	TODO : Figure out what to do to make sure you don't move other
 	pieces when your King is in Check*/
 
-function makeMove (symb, r, c) {};
+function makeMove (symb, r, c) {
+	
+};
 
 /* 	TODO : Cancel out the moves that cause checks if they are actually played.*/
 
@@ -40,7 +42,6 @@ function pushSquares( tempr, tempc, shouldCheck, tSquares, player){
 	var tempB = copyBoard(row);
 
 
-		
 		flag = flag ? (shouldCheck ? checkForCheck(tempB, player) : flag) 
 					: flag;
 					
@@ -97,9 +98,6 @@ function checkForCheck(tempBoard, player){
 		
 		}
 	}
-
-
-
 };
 
 /* 	FUNCTION PURPOSE - Finds out if the move is within the board
