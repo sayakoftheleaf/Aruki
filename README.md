@@ -60,7 +60,11 @@ You can promote pawns (or javelins) to a tier 1, a tier 2 or a tier 3 piece depe
 
 ## Last implemented : 
 - Separated the Module that only handled moves from the game engine
-- Tested withinBoard, findPositionOf and copyBoard
+- Tested withinBoard, positionOf and copyBoard
+- Coded and tested makeNonCaptureMove
+- Tested pushSquares - not sure what the flag variable even is. Need to figure that out
+- Fixed a massive bug in computePawnMoves
+- Coded and fixed computeEvolution
 
 
 ## TODO: 

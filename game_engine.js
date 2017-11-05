@@ -1,5 +1,3 @@
-console.log ("in_game_engine.js");
-
 /*
 
 	TODO : Figure out if you actually need this
@@ -27,8 +25,18 @@ function init_pieces(){
 /*	TODO : Figure out what to do to make sure you don't move other
 	pieces when your King is in Check*/
 
-function makeMove (symb, r, c) {
-	
+/*
+
+Puts a valid move on to the given board
+
+*/
+
+function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, moveBoard) {
+
+	moveBoard[newrow][newcol].player = moveBoard[oldrow][oldcol].player;
+	moveBoard[newrow][newcol].symbol = moveBoard[oldrow][oldcol].symbol;
+	moveBoard[oldrow][oldcol].player = 0;
+	moveBoard[oldrow][oldcol].symbol = "#";	
 };
 
 /* 	TODO : Cancel out the moves that cause checks if they are actually played.*/
@@ -40,52 +48,83 @@ function makeMove (symb, r, c) {
 function pushSquares( tempr, tempc, shouldCheck, tSquares, player){
 
 	var tempB = copyBoard(row);
-
-
-		flag = flag ? (shouldCheck ? checkForCheck(tempB, player) : flag) 
+	
+	// temporary fix
+	flag = true;
+	
+	flag = flag ? (shouldCheck ? checkForCheck(tempB, player) : flag) 
 					: flag;
+
+	//console.log ("flag is " + flag);
 					
-		if (flag)	{
-
-			var tempsq  = {
-					row : tempr,
-					col : tempc
-				};
-			tSquares.push(tempsq);
-		}
+	if (flag)	{
+		var tempsq  = {
+				row : tempr,
+				col : tempc
+			};
+		tSquares.push(tempsq);
+	}
 };
 
-
-function isValidMove(symb, r, c, dr, dc, shouldCheck){
+function isValidMove(symb, r, c, dr, dc, shouldCheck, formalBoard){
 	var flag = true;
-			flag = withinBoard(dr,dc);
-				if (flag === false){
-					return false;
-				}
+	
+	flag = withinBoard(dr,dc);
+	
+	if (!flag){
+		return false;
+	}
+	
+	flag = false;
+	var tempSquares = computeMoves(symb, r, c, false, formalBoard);
+	
+	for (var i = 0; i < tempSquares.length; i++){
+		if ((dr === tempSquares[i].row) && (dc === tempSquares[i].col))
+		flag = true;
+	}
 
-			flag = false;
-			var tempSquares = computeMoves(symb, r, c, false);
-				for (var i = 0; i < tempSquares.length(); i++){
-					if ((dr === tempSquares[i].row) && (dc === tempSquares[i].col))
-						flag = true;
-				}
-
-			if (flag === false)
-				return flag;
-			else 
-				return true;
+	if (!flag)
+		return false;
+	else 
+		return true;
 };
-
 
 /*	TODO : Figure out how to do evolutions*/
-function isValidEvolution(){};
+function computeEvolution(symbol1, symbol2){
+	// greater pike evolution
+	if	(symbol1 === "P" && symbol2 === "P")
+		return "PP";
+	// greater lance evolution
+	else if (symbol1 === symbol2 && symbol2 === "L")
+		return "LL";
+	// Sword evolution
+	else if (symbol1 === "P" && symbol2 === "L")
+		return "S";
+	else if (symbol2 === "P" && symbol1 === "L")
+		return "S";
+	// Long sword evolution
+	else if (symbol1 === "S" && symbol2 === "S")
+		return "SS";
+	else if (symbol1 === "PP" && symbol2 === "LL")
+		return "SS";
+	else if (symbol1 === "LL" && symbol2 === "PP")
+		return "SS";
+	// Javelin evolution
+	else if  (symbol1 === "Z" && symbol2 === "Z")
+		return "N";
+	// Minister evolution
+	else if (symbol1 === "R" && symbol2 === "A")
+		return "MI";
+	else if (symbol2 === "A" && symbol2 === "R")
+		return "MI";
+};
 
 /* TODO : Figure out how to do promotions*/
 function isValidPromotion() {};
 
 function checkForCheck(tempBoard, player){
 
-	var tempsq = positionOf("K", tempboard, player);
+	var tempsq = positionOf("K", tempBoard, player);
 
 	for (var a = 0; a <= 11; a++){
 
@@ -106,8 +145,6 @@ function checkForCheck(tempBoard, player){
 */
 function withinBoard(someRow, someCol) {
 
-	console.log ("Here");
-
 	if ((someRow <= 11) && (someRow >= 0)) {
 		if ((someCol <= 11) && (someCol >= 0)) {
 			return true;
@@ -126,9 +163,9 @@ function withinBoard(someRow, someCol) {
 
 	FUNCTION STATUS - WORKING AS INTENDED.
 */
-function positionOf( symb, someBoard, player) {
+function positionOf(symb, someBoard, player) {
 
-	symb = symb. concat ("\t");
+	//print_board(someBoard);
 
 	var tempSq = {};
 
