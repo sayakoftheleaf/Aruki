@@ -41,17 +41,18 @@ function computeMoves(symb, r, c, shouldCheck, someBoard){
 		
 	}
 
-	if (symb.includes("J")){
+	else if (symb.includes("J")){
+		console.log("going back to Jester");
 		tempSquares = computeJesterMoves(r, c, shouldCheck, player, someBoard);
 		
 	}
 
-	if (symb === "MI"){
+	else if (symb === "MI"){
 		tempSquares = computeMinisterMoves(r, c, shouldCheck, player);
 		
 	}
 
-	if (symb === "R"){
+	else if (symb === "R"){
 		tempSquares = computeRookMoves(r, c, shouldCheck, player);
 		
 	}
@@ -59,59 +60,59 @@ function computeMoves(symb, r, c, shouldCheck, someBoard){
 	// This is necessary to locate which pawn is being used
 	// since they are numbered for the time being
 
-	if (symb.includes("Z")){
+	else if (symb.includes("Z")){
 
 		tempSquares = computePawnMoves(r, c, shouldCheck, player);
 		
 	}
 
-	if (symb === "A"){
+	else if (symb === "A"){
 		tempSquares = computeArrowMoves(r, c, shouldCheck, player);
 		
 	}
 
-	if (symb === "GR"){
+	else if (symb === "GR"){
 		tempSquares = computeGreaterRiverMoves(r, c, shouldCheck, player);
 		// TODO : input ways to delete the row or column
 		// right now, it is just moving and cannot capture
 	}
 
-	if (symb === "LR"){
+	else if (symb === "LR"){
 		tempSquares = computeLesserRiverMoves(r, c, shouldCheck, player);
 		// TODO : input ways to delete the row or column
 		// right now, it is just moving and cannot capture
 	}
 
-	if (symb === "L"){
+	else if (symb === "L"){
 		tempSquares = computeLanceMoves(r, c, shouldCheck, player);
 		
 	}
 
-	if (symb === "P"){
+	else if (symb === "P"){
 		tempSquares = computePikeMoves(r, c, shouldCheck, player);
 		
 	}
 
-	if (symb === "PP"){
+	else if (symb === "PP"){
 		tempSquares = computeGreaterPikeMoves(r, c, shouldCheck, player);
 		
 	}
 
-	if (symb === "LL"){
+	else if (symb === "LL"){
 		tempSquares = computeGreaterLanceMoves(r, c, shouldCheck, player);
 	}
 
-	if (symb === "S"){
+	else if (symb === "S"){
 		tempSquares = computeSwordMoves(r, c, shouldCheck, player);
 		
 	}
 
-	if (symb === "SS"){
+	else if (symb === "SS"){
 		tempSquares = computeLongSwordMoves(r, c, shouldCheck, player);
 		
 	}
 
-	if (symb === "N"){
+	else if (symb === "N"){
 		tempSquares = computeJavelinMoves(r, c, shouldCheck, player);
 		
 	}
@@ -121,8 +122,6 @@ function computeMoves(symb, r, c, shouldCheck, someBoard){
 
 
 function computeKingMoves (r, c, shouldCheck, player){
-
-	console.log("inside computeKingMoves " + r + c);
 
 	var tempSquares = [];
 	var tempr, tempc;
@@ -166,12 +165,9 @@ function computeKingMoves (r, c, shouldCheck, player){
 		tempr = r - 1;
 		tempc = c - 1;
 
-		(console.log ("in this place"));
 		isWithinBoard = withinBoard(tempr, tempc);
 		if (isWithinBoard){
-			console.log("getting deeper");
 			if (isNotBlockedSquare (r, c, tempr, tempc)){
-				console.log("last step");
 				pushSquares(tempr, tempc, shouldCheck, tempSquares, player);
 			}
 			
@@ -221,7 +217,6 @@ function computeKingMoves (r, c, shouldCheck, player){
 			
 		}
 
-		console.log(tempSquares);
 		return tempSquares;
 
 	};
@@ -238,9 +233,7 @@ function computeKingMoves (r, c, shouldCheck, player){
 
    	if (isWithinBoard){
    		if(!(tempBoard[tempr][tempc].player === 0) && !((tempBoard[tempr][tempc].symbol === "LR") || (tempBoard[tempr][tempc].symbol === "GR"))){
-   			console.log("inside jesterCheck " + tempBoard[tempr][tempc].symbol);
    			tsquares = tsquares.concat(computeMoves(tempBoard[tempr][tempc].symbol, r, c, shouldCheck, tempBoard));
-   			console.log(tsquares);
    		}
    	}  
 
@@ -249,10 +242,10 @@ function computeKingMoves (r, c, shouldCheck, player){
 
    function computeJesterMoves (r, c, shouldCheck, player, tempBoard) {
 
+   	console.log("inside jester");
+
    	var tempSquares = [];
    	var tempr, tempc;
-
-   	console.log(tempBoard);
 
 	//Square to the right
 	tempr = r + 1;
