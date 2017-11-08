@@ -47,6 +47,9 @@ function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, moveBoard) {
 
 function pushSquares( tempr, tempc, shouldCheck, tSquares, player){
 
+	console.log("entered pushSquares");
+	console.log(shouldCheck);
+
 	var tempB = copyBoard(row);
 	
 	// temporary fix
