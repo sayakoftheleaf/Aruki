@@ -50,8 +50,8 @@ function create_board(board) {
 function init_board() {
 	//Rooks
 	row[0][0].symbol = "R1";
-	row[11][0].symbol = "R2";
-	row[0][11].symbol = "R1";
+	row[11][0].symbol = "R1";
+	row[0][11].symbol = "R2";
 	row[11][11].symbol = "R2";
 
 	//Arrows

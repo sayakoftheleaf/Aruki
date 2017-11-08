@@ -45,10 +45,8 @@ function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, moveBoard) {
 	looks a little unnecessary to me. Every time you check if a move is valid,
 	you check for checks.*/
 
-function pushSquares( tempr, tempc, shouldCheck, tSquares, player){
+function pushSquares(tempr, tempc, shouldCheck, tSquares, player){
 
-	var tempB = copyBoard(row);
-	
 	// temporary fix
 	flag = true;
 	

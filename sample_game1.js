@@ -46,18 +46,35 @@
 
     print_board(newboard);
 
+    // white move 4
     firstpawn = positionOf("J", newboard, 1);
     somemove = computeJesterMoves(firstpawn.row, firstpawn.col, false, 1, newboard);
     makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[2].row, somemove[2].col, newboard);
 
     print_board(newboard);
 
+    // black move 4
+    firstpawn = positionOf("Z0", newboard, 2);
+    somemove = computePawnMoves(firstpawn.row, firstpawn.col, false, 2);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, newboard);
+
+    // white move 5
     firstpawn = positionOf("J", newboard, 1);
     somemove = computeJesterMoves(firstpawn.row, firstpawn.col, false, 1, newboard);
     makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, newboard);
 
     print_board(newboard);
 
+    // black move 5
+    firstpawn = positionOf("R1", newboard, 2);
+    //console.log(firstpawn);
+    somemove = computeRookMoves(firstpawn.row, firstpawn.col, false, 2, newboard);
+    //console.log(somemove);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, newboard);
+
+    print_board(newboard);
+
+    //white move 6
     firstpawn = positionOf("J", newboard, 1);
     somemove = computeJesterMoves(firstpawn.row, firstpawn.col, false, 1, newboard);
     //console.log(somemove);
@@ -65,7 +82,14 @@
 
     print_board(newboard);
 
+     // black move 6
+    firstpawn = positionOf("Z1", newboard, 2);
+    somemove = computePawnMoves(firstpawn.row, firstpawn.col, false, 2);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, newboard);
 
+    print_board(newboard);
+
+    // white move 7
     firstpawn = positionOf("J", newboard, 1);
     somemove = computeJesterMoves(firstpawn.row, firstpawn.col, false, 1, newboard);
     //console.log(somemove);
@@ -73,12 +97,32 @@
 
     print_board(newboard);
 
+    // black move 7
+    firstpawn = positionOf("R1", newboard, 2);
+    somemove = computeRookMoves(firstpawn.row, firstpawn.col, false, 2, newboard);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, newboard);
 
-    firstpawn = positionOf("J", newboard, 1);
-    somemove = computeJesterMoves(firstpawn.row, firstpawn.col, false, 1, newboard);
-    console.log(somemove);
-    //makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, newboard);
+    print_board(newboard);
 
-   // print_board(newboard);
+    // white move 8
+    firstpawn = positionOf("Z2", newboard, 1);
+    somemove = computePawnMoves(firstpawn.row, firstpawn.col, false, 1);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, newboard);
+
+    print_board(newboard);
+
+    // black move 8
+    firstpawn = positionOf("A1", newboard, 2);
+    somemove = computeArrowMoves(firstpawn.row, firstpawn.col, false, 2, newboard);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, newboard);
+
+    print_board(newboard);
+
+    // white move 8
+    firstpawn = positionOf("A1", newboard, 1);
+    somemove = computeArrowMoves(firstpawn.row, firstpawn.col, false, 1, newboard);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[3].row, somemove[3].col, newboard);
+
+    print_board(newboard);
 }
 
