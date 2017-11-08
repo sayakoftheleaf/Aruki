@@ -41,15 +41,15 @@ function computeMoves(symb, r, c, shouldCheck, someBoard){
 	else if (symb.includes("J"))
 		tempSquares = computeJesterMoves(r, c, shouldCheck, player, someBoard);
 	else if (symb === "MI")
-		tempSquares = computeMinisterMoves(r, c, shouldCheck, player);
+		tempSquares = computeMinisterMoves(r, c, shouldCheck, player, someBoard);
 	else if (symb.includes("R"))
-		tempSquares = computeRookMoves(r, c, shouldCheck, player);
+		tempSquares = computeRookMoves(r, c, shouldCheck, player, someBoard);
 	// This is necessary to locate which pawn is being used
 	// since they are numbered for the time being
 	else if (symb.includes("Z"))
 		tempSquares = computePawnMoves(r, c, shouldCheck, player);
-	else if (symb === "A")
-		tempSquares = computeArrowMoves(r, c, shouldCheck, player);
+	else if (symb.includes("A"))
+		tempSquares = computeArrowMoves(r, c, shouldCheck, player, someBoard);
 	else if (symb === "GR"){
 		tempSquares = computeGreaterRiverMoves(r, c, shouldCheck, player);
 		// TODO : input ways to delete the row or column
@@ -267,13 +267,13 @@ function jesterCheck(r, c, tempr, tempc, shouldCheck, tempBoard){
 	FUNCTION STATUS - Works perfectly
 */
 
-	function computeMinisterMoves ( r, c, shouldCheck, player) {
+	function computeMinisterMoves ( r, c, shouldCheck, player, someBoard) {
 
 		var tempSquares = [];
 		var tempr, tempc; 
 
-		tempSquares = computeRookMoves(r,c, shouldCheck);
-		tempSquares = tempSquares.concat(computeArrowMoves(r,c, shouldCheck));
+		tempSquares = computeRookMoves(r,c, shouldCheck, player, someBoard);
+		tempSquares = tempSquares.concat(computeArrowMoves(r,c, shouldCheck, player, someBoard));
 
 		return tempSquares;
 

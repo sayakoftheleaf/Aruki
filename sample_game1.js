@@ -118,11 +118,21 @@
 
     print_board(newboard);
 
-    // white move 8
+    // white move 9
     firstpawn = positionOf("A1", newboard, 1);
     somemove = computeArrowMoves(firstpawn.row, firstpawn.col, false, 1, newboard);
     makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[3].row, somemove[3].col, newboard);
 
     print_board(newboard);
+
+    // white move 10
+    // Testing Jester with Arrow
+    firstpawn = positionOf("J", newboard, 1);
+    somemove = computeJesterMoves(firstpawn.row, firstpawn.col, false, 1, newboard);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[8].row, somemove[8].col, newboard);
+
+    print_board(newboard);
+    printPlayerConfig(newboard);
+
 }
 
