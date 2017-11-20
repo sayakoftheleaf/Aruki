@@ -1,10 +1,15 @@
 $(document).ready(function(){
-	setupBoard();
-	cssSquare();
+
 	create_board(row);
 	init_board();
-	print_board(row);
+
+	setupBoard();
+	cssSquare();
 	putPieces(row);
+
+	$(".Square").click(function(){
+
+	});
 });
 
 function setupBoard(){
@@ -13,7 +18,7 @@ function setupBoard(){
 		var divstring = "<div class=\"" + classa + "\"></div>"
 		$(".Board").append(divstring);
 		$("." + classa).css({"display":"block",
-			"margin" : "6px",
+			"margin" : "8px",
 		});
 		for (var b = 0; b < 12; b++){
 			var strcol = "Col" + b;
@@ -23,21 +28,17 @@ function setupBoard(){
 };
 
 function cssSquare(){
-	$(".Board").css({"line-height": "0px",
-					 //"display":"grid",
-					 //"grid-template-columns":"repeat(12, 48px)",
-					 //"grid-template-rows":"repeat(12, 48px)"
-					});
+	$(".Board").css({"line-height": "0px"});
 
 	$(".Square").css({
 		"outline" : "solid",
-		"outline-width" : "3px",
+		"outline-width" : "4px",
 		"border" : "1px solid #997E5A",
 		"height":"48px",
 		"width":"48px",
 		"display":"inline-block",
-		"margin-right" : "3px",
-		"margin-left" : "3px",
+		"margin-right" : "4px",
+		"margin-left" : "4px",
 	});
 
 	var rowflag = false;
