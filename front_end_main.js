@@ -9,7 +9,7 @@ function setupBoard(){
 		var divstring = "<div class=\"" + classa + "\"></div>"
 		$(".Board").append(divstring);
 		$("." + classa).css({"display":"block",
-							 "margin" : "4px",
+							 "margin" : "6px",
 		                    });
 		for (var b = 0; b < 12; b++){
 			var strcol = "Col" + b;
@@ -27,13 +27,13 @@ function cssSquare(){
 
 	$(".Square").css({
 					   "outline" : "solid",
-					   "outline-width" : "2px",
+					   "outline-width" : "3px",
 					   "border" : "1px solid #997E5A",
 					   "height":"52px",
 					   "width":"52px",
 					   "display":"inline-block",
-					   "margin-right" : "2px",
-					   "margin-left" : "2px",
+					   "margin-right" : "3px",
+					   "margin-left" : "3px",
 					  });
 
 	var rowflag = false;
