@@ -1,5 +1,4 @@
 document.write ('<script type = "text/javascript" src = "sample_game1.js"></script>');
-
 window.onload = function(){
 
 	create_board(row);

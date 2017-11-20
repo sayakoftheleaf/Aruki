@@ -1,0 +1,5 @@
+Left to right:
+
+LR, GR, greater pike, pike, arrow, sword, greater lance,
+lance, longsword, pawn, jester, minister, javelin v1, rook, king, 
+javelin v2

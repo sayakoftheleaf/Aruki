@@ -69,6 +69,8 @@ You can promote pawns (or javelins) to a tier 1, a tier 2 or a tier 3 piece depe
 
 ## TODO: 
 
+- Figure out how to differentiate two copies of the same piece
+
 - Write checkforCheck
 
 - Implement the moves for the Greater and Lesser Rivers (Essential for testing the moves module)
