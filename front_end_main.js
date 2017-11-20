@@ -100,11 +100,6 @@ function putPieces(someBoard){
 					"background" : "url('Files/Borderless_sprites.png') -96px -32px"
 				});
 			}
-			else if (symb.includes("R")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -160px -32px"
-				});
-			}
 			else if (symb.includes("Z")){
 				$(classstr + " .Piece").css({
 					"background" : "url('Files/Borderless_sprites.png') -32px -32px"
@@ -115,17 +110,22 @@ function putPieces(someBoard){
 					"background" : "url('Files/Borderless_sprites.png') -128px 0"
 				});
 			}
-			else if (symb.includes("GR")){
+			else if (symb === "GR"){
 				$(classstr + " .Piece").css({
 					"background" : "url('Files/Borderless_sprites.png') -32px 0"
 				});
 
 			}
-			else if (symb.includes("LR")){
+			else if (symb === "LR"){
 				$(classstr + " .Piece").css({
 					"background" : "url('Files/Borderless_sprites.png') 0 0"
 				});
 			}	
+			else if (symb.includes("R")){
+				$(classstr + " .Piece").css({
+					"background" : "url('Files/Borderless_sprites.png') -160px -32px"
+				});
+			}
 			else if (symb.includes("L")){
 				console.log("here");
 				$(classstr + " .Piece").css({

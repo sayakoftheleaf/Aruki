@@ -16,9 +16,9 @@
 	occupied by a piece of the same side
 
 	FUNCTION STATUS - Probably bug free. UNTESTED.	
-*/
+	*/
 
-function isNotBlockedSquare (r, c, tempr, tempc, someBoard) {
+	function isNotBlockedSquare (r, c, tempr, tempc, someBoard) {
 
 		var flag;
 		someBoard[r][c].player === someBoard[tempr][tempc].player ? flag = false : flag = true;
@@ -40,39 +40,33 @@ function computeMoves(symb, r, c, someBoard){
 		tempSquares = computeKingMoves(r, c, player, someBoard);
 	else if (symb.includes("J"))
 		tempSquares = computeJesterMoves(r, c, player, someBoard);
-	else if (symb === "MI")
+	else if (symb === "GR"){
+		tempSquares = computeGreaterRiverMoves(r, c, player, someBoard);
+	}
+	else if (symb === "LR"){
+		tempSquares = computeLesserRiverMoves(r, c, player, someBoard);
+	}
+	else if (symb.includes("MI"))
 		tempSquares = computeMinisterMoves(r, c, player, someBoard);
+	else if (symb.includes("PP"))
+		tempSquares = computeGreaterPikeMoves(r, c, player, someBoard);
+	else if (symb.includes("LL"))
+		tempSquares = computeGreaterLanceMoves(r, c, player, someBoard);
+		else if (symb.includes("SS"))
+		tempSquares = computeLongSwordMoves(r, c, player, someBoard);
 	else if (symb.includes("R"))
 		tempSquares = computeRookMoves(r, c, player, someBoard);
-	// This is necessary to locate which pawn is being used
-	// since they are numbered for the time being
 	else if (symb.includes("Z"))
 		tempSquares = computePawnMoves(r, c, player, someBoard);
 	else if (symb.includes("A"))
 		tempSquares = computeArrowMoves(r, c, player, someBoard);
-	else if (symb === "GR"){
-		tempSquares = computeGreaterRiverMoves(r, c, player, someBoard);
-		// TODO : input ways to delete the row or column
-		// right now, it is just moving and cannot capture
-	}
-	else if (symb === "LR"){
-		tempSquares = computeLesserRiverMoves(r, c, player, someBoard);
-		// TODO : input ways to delete the row or column
-		// right now, it is just moving and cannot capture
-	}
-	else if (symb === "L")
+	else if (symb.includes("L"))
 		tempSquares = computeLanceMoves(r, c, player, someBoard);
-	else if (symb === "P")
+	else if (symb.includes("P"))
 		tempSquares = computePikeMoves(r, c, player, someBoard);
-	else if (symb === "PP")
-		tempSquares = computeGreaterPikeMoves(r, c, player, someBoard);
-	else if (symb === "LL")
-		tempSquares = computeGreaterLanceMoves(r, c, player, someBoard);
-	else if (symb === "S")
+	else if (symb.includes("S"))
 		tempSquares = computeSwordMoves(r, c, player, someBoard);
-	else if (symb === "SS")
-		tempSquares = computeLongSwordMoves(r, c, player, someBoard);
-	else if (symb === "N")
+	else if (symb.includes("N"))
 		tempSquares = computeJavelinMoves(r, c, player, someBoard);
 
 	return tempSquares;
@@ -146,7 +140,7 @@ function computeKingMoves (r, c, player, someBoard){
 	FUNCTION PURPOSE - Computes the moves of Pawns
 
 	FUNCTION STATUS - Working perfectly
-*/
+	*/
 
 	function computePawnMoves ( r, c, player, someBoard) {
 
@@ -183,9 +177,9 @@ function computeKingMoves (r, c, player, someBoard){
 
   FUNCTION STATUS - Logically very simple, so should be working when all the other pieces are working.
   - Still needs testing however 
-*/
+  */
 
-function jesterCheck(r, c, tempr, tempc, someBoard){
+  function jesterCheck(r, c, tempr, tempc, someBoard){
   	
   	var tsquares = [];
 
@@ -197,8 +191,8 @@ function jesterCheck(r, c, tempr, tempc, someBoard){
   		}
   	} 
 
- return tsquares; 
- };
+  	return tsquares; 
+  };
 
   function computeJesterMoves (r, c, player, someBoard) {
 
@@ -260,33 +254,33 @@ function jesterCheck(r, c, tempr, tempc, someBoard){
 	FUNCTION PURPOSE - Computes the possible moves of the minister
 
 	FUNCTION STATUS - Works perfectly
-*/
+	*/
 
-function computeMinisterMoves ( r, c, player, someBoard) {
+	function computeMinisterMoves ( r, c, player, someBoard) {
 
-	var tempSquares = [];
-	var tempr, tempc; 
+		var tempSquares = [];
+		var tempr, tempc; 
 
-	tempSquares = computeRookMoves(r,c, player, someBoard);
-	tempSquares = tempSquares.concat(computeArrowMoves(r,c, player, someBoard));
+		tempSquares = computeRookMoves(r,c, player, someBoard);
+		tempSquares = tempSquares.concat(computeArrowMoves(r,c, player, someBoard));
 
-	return tempSquares;
+		return tempSquares;
 
-};
+	};
 
-function RookArrowCheck(tempr, tempc, tempSquares, player, someBoard, flag){
-	
-	if (withinBoard(tempr, tempc)){
-		if (flag){
-			if(someBoard[tempr][tempc].player === player)
-				return false;
-			else 
-				pushSquares(tempr, tempc, tempSquares, player);
+	function RookArrowCheck(tempr, tempc, tempSquares, player, someBoard, flag){
+
+		if (withinBoard(tempr, tempc)){
+			if (flag){
+				if(someBoard[tempr][tempc].player === player)
+					return false;
+				else 
+					pushSquares(tempr, tempc, tempSquares, player);
+			}
 		}
-	}
 
-	return flag;
-};
+		return flag;
+	};
 
 
 /*
@@ -295,26 +289,26 @@ function RookArrowCheck(tempr, tempc, tempSquares, player, someBoard, flag){
 	FUNCTION STATUS - Works perfectly
 	*/
 
-function computeRookMoves ( r, c, player, someBoard) {
+	function computeRookMoves ( r, c, player, someBoard) {
 
-	var tempSquares = [];
+		var tempSquares = [];
 
-	var AscendingRowFlag = true;
-	var AscendingColFlag = true;
-	var DescendingRowFlag = true;
-	var DescendingColFlag = true;
+		var AscendingRowFlag = true;
+		var AscendingColFlag = true;
+		var DescendingRowFlag = true;
+		var DescendingColFlag = true;
 
-	for(var counter = 1; counter < 12; counter = counter + 1)
-	{
-		AscendingColFlag = RookArrowCheck(r, c + counter, tempSquares, player, someBoard, AscendingColFlag);
-		AscendingRowFlag = RookArrowCheck(r + counter, c, tempSquares, player, someBoard, AscendingRowFlag);
-		DescendingRowFlag = RookArrowCheck(r - counter, c, tempSquares, player, someBoard, DescendingRowFlag);
-		DescendingColFlag = RookArrowCheck(r, c - counter, tempSquares, player, someBoard, DescendingColFlag);
+		for(var counter = 1; counter < 12; counter = counter + 1)
+		{
+			AscendingColFlag = RookArrowCheck(r, c + counter, tempSquares, player, someBoard, AscendingColFlag);
+			AscendingRowFlag = RookArrowCheck(r + counter, c, tempSquares, player, someBoard, AscendingRowFlag);
+			DescendingRowFlag = RookArrowCheck(r - counter, c, tempSquares, player, someBoard, DescendingRowFlag);
+			DescendingColFlag = RookArrowCheck(r, c - counter, tempSquares, player, someBoard, DescendingColFlag);
 
-	}
+		}
 
-	return tempSquares;
-};
+		return tempSquares;
+	};
 
 /* 	FUNCTION PURPOSE - Calculates all the valid diagonal moves for an arrow
 
@@ -365,7 +359,7 @@ function GreaterRiverFlood (eliminate, player, someBoard){
 			
 			someBoard[position.row][a] =
 		}
-			
+
 		pushSquares(a, c, tempSquares, player);
 	}
 
@@ -380,12 +374,12 @@ function computeLesserRiverMoves (r, c, player, someBoard) {
 	FUNCTION PURPOSE - Computes the movement of lances
 
 	FUNCTION STATUS - Untested
-*/
+	*/
 
-function computeLanceMoves (r, c, player, someBoard) {
+	function computeLanceMoves (r, c, player, someBoard) {
 
-	var tempSquares = [];
-	var tempr, tempc;
+		var tempSquares = [];
+		var tempr, tempc;
 
 	// Because lance mimics the movement of the King but to a lesser degree,
 	// we can reuse the checkKing helper function
@@ -525,27 +519,27 @@ function computeSwordMoves (r, c, player, someBoard){
 	FUNCTION PURPOSE : computes all the valid moves for a Long Sword.
 
 	FUNCTION STATUS : Preliminary tests passed. Working as Expected.
-*/
+	*/
 
 
-function computeLongSwordMoves (r, c, player, someBoard) {
+	function computeLongSwordMoves (r, c, player, someBoard) {
 
-	var tempSquares = [];
-	var tempr, tempc;
-	var blockedFlag;
+		var tempSquares = [];
+		var tempr, tempc;
+		var blockedFlag;
 
-	tempSquares = computeGreaterPikeMoves(r, c, player, someBoard);
-	tempSquares = tempSquares.concat(computeGreaterLanceMoves(r,c, player, someBoard));
+		tempSquares = computeGreaterPikeMoves(r, c, player, someBoard);
+		tempSquares = tempSquares.concat(computeGreaterLanceMoves(r,c, player, someBoard));
 
-	return tempSquares;
-};
+		return tempSquares;
+	};
 
 
-function computeJavelinMoves (r, c, player, someBoard) {
+	function computeJavelinMoves (r, c, player, someBoard) {
 
-	var tempSquares = [];
-	var tempr, tempc;
-	var blockedFlag;
+		var tempSquares = [];
+		var tempr, tempc;
+		var blockedFlag;
 
 	//case 1
 	tempr = r;
