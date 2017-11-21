@@ -84,83 +84,174 @@ function putPieces(someBoard){
 				"margin-top":"6px"});
 
 			var symb = someBoard[row][col].symbol;
+			var player = someBoard[row][col].player;
 
 			if (symb === "K"){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -192px -32px",
-				});
-			}
-			else if (symb.includes("J")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -64px -32px"
-				});
-			}
-			else if (symb === "MI"){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -96px -32px"
-				});
-			}
-			else if (symb.includes("Z")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -32px -32px"
-				});
-			}
-			else if (symb.includes("A")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -128px 0"
-				});
-			}
-			else if (symb === "GR"){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -32px 0"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -192px -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -192px -32px",
+					});
+				}
 
 			}
+			else if (symb.includes("J")){
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -64px -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -64px -32px",
+					});
+				}
+			}
+			else if (symb === "MI"){
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -96px -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -96px -32px",
+					});
+				}
+			}
+			else if (symb.includes("Z")){
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -32px -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -32px -32px",
+					});
+				}
+			}
+			else if (symb.includes("A")){
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -128px 0",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -128px 0",
+					});
+				}
+			}
+			else if (symb === "GR"){
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -32px 0",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -32px 0",
+					});
+				}
+			}
 			else if (symb === "LR"){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') 0 0"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') 0 0",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') 0 0",
+					});
+				}
 			}	
 			else if (symb.includes("R")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -160px -32px"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -160px -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -160px -32px",
+					});
+				}
 			}
 			else if (symb.includes("L")){
-				console.log("here");
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -64px 0"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -64px 0",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -64px 0",
+					});
+				}
 			}
 			else if (symb.includes("P")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -224px 0"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -224px 0",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -224px 0",
+					});
+				}
 			}
 			else if (symb.includes("PP")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -64px 0"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -64px 0",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -64px 0",
+					});
+				}
 			}
 			else if (symb.includes("LL")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -192px 0"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') -192px 0",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -192px 0",
+					});
+				}
 			}
 			else if (symb.includes("S")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -160px 0"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') 0 -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png')  0 -32px",
+					});
+				}
 			}
 			else if (symb.includes("SS")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') 0 -32px"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png') 0 -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png')  0 -32px",
+					});
+				}
+
 			}
 			else if (symb.includes("N")){
-				$(classstr + " .Piece").css({
-					"background" : "url('Files/Borderless_sprites.png') -128px -32px"
-				});
+				if (player === 1){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/White_sprites.png')-128px -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+					"background" : "url('Files/Black_sprites.png') -128px -32px",
+					});
+				}
 			}
 		}
 	}
