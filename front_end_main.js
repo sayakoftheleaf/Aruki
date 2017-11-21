@@ -5,10 +5,29 @@ $(document).ready(function(){
 
 	setupBoard();
 	cssSquare();
+	refreshSquares();
 	putPieces(row);
 
-	$(".Square").click(function(){
+	var playermove = 1;
 
+	$(".Square").click(function(){
+		var Row = $(this).parent().attr('class');
+		var Col = $(this).attr('class');
+		Row = Row.substring(3);
+		Col = Col.substring(10);
+
+		var numrow = Number(Row);
+		var numcol = Number(Col);
+
+		var symb = row[numrow][numcol].symbol;
+
+		if(row[numrow][numcol].player === playermove){
+			refreshSquares();
+			highlightpieces(computeMoves(symb, numrow, numcol, row));
+
+		}
+
+		
 	});
 });
 
@@ -41,6 +60,9 @@ function cssSquare(){
 		"margin-left" : "4px",
 	});
 
+};
+
+function refreshSquares(){
 	var rowflag = false;
 	for(var a = 0; a < 12; a++){
 		
@@ -68,8 +90,7 @@ function cssSquare(){
 
 		rowflag = !rowflag;
 	}
-
-};
+}
 
 function putPieces(someBoard){
 	for(var row = 0 ; row < 12; row++){
@@ -256,6 +277,17 @@ function putPieces(someBoard){
 		}
 	}
 };
+
+function highlightpieces(moves){
+	
+	for (var a = 0; a < moves.length; a++){
+		var divstring = ".Row" + moves[a].row + " .Col" + moves[a].col;
+		$(divstring).css({"outline-color":"#ffd11a" 
+				});
+	}
+
+	
+}
 
 
 

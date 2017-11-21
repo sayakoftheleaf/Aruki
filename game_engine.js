@@ -155,7 +155,7 @@ function checkForCheck(someBoard, player){
 			if (someBoard[a][b].player !== 0 && someBoard[a][b].player !== player){
 
 				var tempSquares = computeMoves(someBoard[a][b].symbol, a, b, someBoard);
-				if(someBoard[a][b].symbol === )
+				//if(someBoard[a][b].symbol === )
 				for(var x = 0; x < tempSquares.length; x++){
 					if (tempSquares[x].row === tempsq.row && tempSquares[x].col === tempsq.col){
 						return true;

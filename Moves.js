@@ -350,7 +350,7 @@ function computeGreaterRiverThreats (r, c, player, someBoard){
 
 	return tempSquares;
 }
-
+/*
 function GreaterRiverFlood (eliminate, player, someBoard){
 	var position = positionOf("GR", someBoard, player);
 
@@ -364,7 +364,7 @@ function GreaterRiverFlood (eliminate, player, someBoard){
 	}
 
 }
-
+*/
 function computeLesserRiverMoves (r, c, player, someBoard) {
 	return computeKingMoves(r, c, player, someBoard);
 }
