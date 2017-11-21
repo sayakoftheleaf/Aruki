@@ -274,8 +274,12 @@ function computeKingMoves (r, c, player, someBoard){
 			if (flag){
 				if(someBoard[tempr][tempc].player === player)
 					return false;
-				else 
+				else if (someBoard[tempr][tempc].player === 0)
+						pushSquares(tempr, tempc, tempSquares, player);
+				else {
 					pushSquares(tempr, tempc, tempSquares, player);
+					return false;
+				}
 			}
 		}
 

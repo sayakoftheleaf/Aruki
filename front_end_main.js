@@ -22,6 +22,7 @@ $(document).ready(function(){
 		playermove = temp[0];
 		selected = temp[1];
 		tempSquares = temp[2];
+		console.log(tempSquares);
 	});
 });
 
