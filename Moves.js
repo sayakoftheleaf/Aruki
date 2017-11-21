@@ -52,7 +52,7 @@ function computeMoves(symb, r, c, someBoard){
 		tempSquares = computeGreaterPikeMoves(r, c, player, someBoard);
 	else if (symb.includes("LL"))
 		tempSquares = computeGreaterLanceMoves(r, c, player, someBoard);
-		else if (symb.includes("SS"))
+	else if (symb.includes("SS"))
 		tempSquares = computeLongSwordMoves(r, c, player, someBoard);
 	else if (symb.includes("R"))
 		tempSquares = computeRookMoves(r, c, player, someBoard);
@@ -442,8 +442,6 @@ function computeGreaterPikeMoves (r, c, player, someBoard) {
 	var tempSquares = [];
 	var tempr, tempc;
 	var blockedFlag;
-
-	c
 
 	tempSquares = computePikeMoves(r,c, player, someBoard);
 

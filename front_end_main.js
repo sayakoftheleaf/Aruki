@@ -5,34 +5,64 @@ $(document).ready(function(){
 
 	setupBoard();
 	cssSquare();
-	refreshSquares();
+	refreshSquares(false);
 	putPieces(row);
 
 	var playermove = 1;
-	var selectedflag = false;
-
+	var selected = {
+		symbol : "#",
+		row : -1,
+		col : -1
+	};
+	var tempSquares = [];
+	
 	$(".Square").click(function(){
-		console.log(selectedflag);
-		selectedflag = highlightcontrol($(this), playermove, selectedflag);
+		console.log(selected.symbol);
+		temp = highlightcontrol($(this), playermove, selected, tempSquares);
+		playermove = temp[0];
+		selected = temp[1];
+		tempSquares = temp[2];
 	});
 });
 
-function highlightcontrol(square, playermove, selectedflag){
-	if(!selectedflag){
-		var Row = square.parent().attr('class');
-		var Col = square.attr('class');
-		Row = Row.substring(3);
-		Col = Col.substring(10);
+function highlightcontrol(square, playermove, selected, tempSquares){
+	var Row = square.parent().attr('class');
+	var Col = square.attr('class');
+	Row = Row.substring(3);
+	Col = Col.substring(10);
 
-		var numrow = Number(Row);
-		var numcol = Number(Col);
+	var numrow = Number(Row);
+	var numcol = Number(Col);
 
+	if(selected.symbol === "#"){
 		var symb = row[numrow][numcol].symbol;
 
+		selected.symbol = symb;
+		selected.row = numrow;
+		selected.col = numcol;
+
 		if(row[numrow][numcol].player === playermove){
-			refreshSquares();
-			highlightpieces(computeMoves(symb, numrow, numcol, row));
-			return true;
+			refreshSquares(false);
+			tempSquares = computeMoves(symb, numrow, numcol, row);
+			highlightpieces(tempSquares);
+			return [playermove, selected, tempSquares];
+		}
+	} else {
+		console.log("here");
+		if (isValidMove(selected.symbol, selected.row, selected.col, numrow, numcol, row, tempSquares)){
+			makeNonCaptureMove (selected.row, selected.col, numrow, numcol, playermove, row);
+			selected.symbol = "#";
+			selected.row = -1;
+			selected.col = -1;
+
+			if (playermove === 1) 
+				playermove = 2;
+			else if (playermove === 2)
+				playermove = 1;
+			
+			refreshSquares(true);
+			putPieces(row);
+			return [playermove, selected, []];
 		}
 	}
 	return false;
@@ -44,7 +74,7 @@ function setupBoard(){
 		var divstring = "<div class=\"" + classa + "\"></div>"
 		$(".Board").append(divstring);
 		$("." + classa).css({"display":"block",
-			"margin" : "8px",
+			"margin" : "0px",
 		});
 		for (var b = 0; b < 12; b++){
 			var strcol = "Col" + b;
@@ -54,22 +84,23 @@ function setupBoard(){
 };
 
 function cssSquare(){
-	$(".Board").css({"line-height": "0px"});
+	$(".Board").css({
+		"line-height": "0px",
+		"background-image": "url(Files/Board_sample.png)",
+		"background-repeat": "no-repeat"
+	});
 
 	$(".Square").css({
-		"outline" : "solid",
-		"outline-width" : "4px",
-		"border" : "1px solid #997E5A",
+		"border" : "4px solid #997E5A00",
 		"height":"48px",
 		"width":"48px",
 		"display":"inline-block",
-		"margin-right" : "4px",
-		"margin-left" : "4px",
+		"box-sizing": "border-box"
 	});
 
 };
 
-function refreshSquares(){
+function refreshSquares(deletenodes){
 	var rowflag = false;
 	for(var a = 0; a < 12; a++){
 		
@@ -83,14 +114,24 @@ function refreshSquares(){
 		for (var b = 0; b < 12; b++){
 
 			var divstring = "." + classa + " .Col" + b;
-			if (color)
-				$(divstring).css({"background-color": "#9F6614",
-					"outline-color":"#9F6614"
+			if (color){
+				$(divstring).css({"background-color": "#9F661400",
+					"border-color":"#9F661400"
 				});
-			else 
-				$(divstring).css({"background-color":"#BE9253",
-					"outline-color":"#BE9253" 
+
+				if (deletenodes)
+					$(divstring).empty();
+			}
+			else {
+				$(divstring).css({"background-color":"#BE925300",
+					"border-color":"#BE925300"
 				});
+
+				if (deletenodes)
+					$(divstring).empty();
+
+			}
+				
 
 			color = !color
 		}
@@ -289,14 +330,10 @@ function highlightpieces(moves){
 	
 	for (var a = 0; a < moves.length; a++){
 		var divstring = ".Row" + moves[a].row + " .Col" + moves[a].col;
-		$(divstring).css({"outline-color":"#ffd11a" 
+		$(divstring).css({"border-color":"#ffd11aff"
 	});
 	}
-
-	
 }
-
-
 
 //Brown - #9F6614
 // Yellow - #BE9253

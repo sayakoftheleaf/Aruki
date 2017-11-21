@@ -71,7 +71,7 @@ function pushSquares(tempr, tempc, tSquares, player){
 	tSquares.push(tempsq);
 };
 
-function isValidMove(symb, r, c, dr, dc, formalBoard){
+function isValidMove(symb, r, c, dr, dc, formalBoard, tempSquares){
 	var flag = true;
 	
 	flag = withinBoard(dr,dc);
@@ -81,8 +81,6 @@ function isValidMove(symb, r, c, dr, dc, formalBoard){
 	}
 	
 	flag = false;
-	var tempSquares = computeMoves(symb, r, c, false, formalBoard);
-	
 	for (var i = 0; i < tempSquares.length; i++){
 		if ((dr === tempSquares[i].row) && (dc === tempSquares[i].col))
 			flag = true;
