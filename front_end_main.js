@@ -17,7 +17,6 @@ $(document).ready(function(){
 	var tempSquares = [];
 	
 	$(".Square").click(function(){
-		console.log(selected.symbol);
 		temp = highlightcontrol($(this), playermove, selected, tempSquares);
 		playermove = temp[0];
 		selected = temp[1];
@@ -36,20 +35,21 @@ function highlightcontrol(square, playermove, selected, tempSquares){
 	var numcol = Number(Col);
 
 	if(selected.symbol === "#"){
+		console.log("clicked empty");
 		var symb = row[numrow][numcol].symbol;
 
-		selected.symbol = symb;
-		selected.row = numrow;
-		selected.col = numcol;
-
 		if(row[numrow][numcol].player === playermove){
+			selected.symbol = symb;
+			selected.row = numrow;
+			selected.col = numcol;
+
 			refreshSquares(false);
 			tempSquares = computeMoves(symb, numrow, numcol, row);
 			highlightpieces(tempSquares);
 			return [playermove, selected, tempSquares];
-		}
+		} else return [playermove, selected, tempSquares];
 	} else {
-		console.log("here");
+		console.log("clicked piece");
 		if (isValidMove(selected.symbol, selected.row, selected.col, numrow, numcol, row, tempSquares)){
 			makeNonCaptureMove (selected.row, selected.col, numrow, numcol, playermove, row);
 			selected.symbol = "#";
@@ -64,9 +64,11 @@ function highlightcontrol(square, playermove, selected, tempSquares){
 			refreshSquares(true);
 			putPieces(row);
 			return [playermove, selected, []];
+		} else {
+			console.log([playermove, selected, []]);
+			return [playermove, selected, []];
 		}
 	}
-	return false;
 }
 
 function setupBoard(){
@@ -132,7 +134,7 @@ function refreshSquares(deletenodes){
 					$(divstring).empty();
 
 			}
-				
+
 
 			color = !color
 		}
