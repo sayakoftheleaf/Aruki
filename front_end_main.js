@@ -21,7 +21,6 @@ $(document).ready(function(){
 		playermove = temp[0];
 		selected = temp[1];
 		tempSquares = temp[2];
-		console.log(tempSquares);
 	});
 });
 
@@ -49,7 +48,7 @@ function highlightcontrol(square, playermove, selected, tempSquares){
 			return [playermove, selected, tempSquares];
 		} else return [playermove, selected, tempSquares];
 	} else {
-		console.log("clicked piece");
+		console.log(" in else");
 		if (isValidMove(selected.symbol, selected.row, selected.col, numrow, numcol, row, tempSquares)){
 			makeNonCaptureMove (selected.row, selected.col, numrow, numcol, playermove, row);
 			selected.symbol = "#";
@@ -64,8 +63,26 @@ function highlightcontrol(square, playermove, selected, tempSquares){
 			refreshSquares(true);
 			putPieces(row);
 			return [playermove, selected, []];
+		} else if (row[numrow][numcol].symbol === "#"){
+			console.log("detected blank");
+			return [playermove, selected, []];
+		} else if (row[numrow][numcol].player === playermove){
+
+			console.log("detected diff");
+			selected.symbol = row[numrow][numcol].symbol;
+			selected.row = numrow;
+			selected.col = numcol;
+
+			refreshSquares(false);
+			tempSquares = computeMoves(selected.symbol, selected.row, selected.col, row);
+			highlightpieces(tempSquares);
+			return [playermove, selected, tempSquares];
 		} else {
-			console.log([playermove, selected, []]);
+			console.log("detected opponent piece");
+			refreshSquares(false);
+			selected.symbol = "#";
+			selected.row = -1;
+			selected.col = -1;
 			return [playermove, selected, []];
 		}
 	}
