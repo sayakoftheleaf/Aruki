@@ -37,7 +37,7 @@ function setupBoard(){
 		var divstring = "<div class=\"" + classa + "\"></div>"
 		$(".Board").append(divstring);
 		$("." + classa).css({"display":"block",
-			"margin" : "8px",
+			"margin" : "0px",
 		});
 		for (var b = 0; b < 12; b++){
 			var strcol = "Col" + b;
@@ -47,17 +47,18 @@ function setupBoard(){
 };
 
 function cssSquare(){
-	$(".Board").css({"line-height": "0px"});
+	$(".Board").css({
+		"line-height": "0px",
+		"background-image": "url(Files/Board_sample.png)",
+		"background-repeat": "no-repeat"
+	});
 
 	$(".Square").css({
-		"outline" : "solid",
-		"outline-width" : "4px",
-		"border" : "1px solid #997E5A",
+		"border" : "4px solid #997E5A00",
 		"height":"48px",
 		"width":"48px",
 		"display":"inline-block",
-		"margin-right" : "4px",
-		"margin-left" : "4px",
+		"box-sizing": "border-box"
 	});
 
 };
@@ -77,12 +78,12 @@ function refreshSquares(){
 
 			var divstring = "." + classa + " .Col" + b;
 			if (color)
-				$(divstring).css({"background-color": "#9F6614",
-					"outline-color":"#9F6614"
+				$(divstring).css({"background-color": "#9F661400",
+					"border-color":"#9F661400"
 				});
 			else 
-				$(divstring).css({"background-color":"#BE9253",
-					"outline-color":"#BE9253" 
+				$(divstring).css({"background-color":"#BE925300",
+					"border-color":"#BE925300"
 				});
 
 			color = !color
@@ -282,7 +283,7 @@ function highlightpieces(moves){
 	
 	for (var a = 0; a < moves.length; a++){
 		var divstring = ".Row" + moves[a].row + " .Col" + moves[a].col;
-		$(divstring).css({"outline-color":"#ffd11a" 
+		$(divstring).css({"border-color":"#ffd11aff"
 				});
 	}
 
