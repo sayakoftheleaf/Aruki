@@ -1,8 +1,12 @@
 body{
-	background:black;
+	background:#252525;
 }
 .Wrapper{
 	display: inline-block;
+	margin: 48px;
+}
+.Board, .Captured > div{
+	box-shadow: 0 8px 0 0 #111111, 0 8px 2px 0 #111111AA, 0 8px 4px 0 #111111AA, 0 8px 16px 0 #111111AA;
 }
 .Piece{
 	margin:auto;
