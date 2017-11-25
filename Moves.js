@@ -16,7 +16,7 @@
 	occupied by a piece of the same side
 
 	FUNCTION STATUS - Probably bug free. UNTESTED.	
-	*/
+*/
 
 	function isNotBlockedSquare (r, c, tempr, tempc, someBoard) {
 
@@ -140,7 +140,7 @@ function computeKingMoves (r, c, player, someBoard){
 	FUNCTION PURPOSE - Computes the moves of Pawns
 
 	FUNCTION STATUS - Working perfectly
-	*/
+*/
 
 	function computePawnMoves ( r, c, player, someBoard) {
 
@@ -173,11 +173,13 @@ function computeKingMoves (r, c, player, someBoard){
 
 };
 
-/* FUNCTION PURPOSE - Calculates all the moves for the Jester
+/* 
+	FUNCTION PURPOSE - Calculates all the moves for the Jester
 
-  FUNCTION STATUS - Logically very simple, so should be working when all the other pieces are working.
-  - Still needs testing however 
-  */
+  	FUNCTION STATUS - Logically very simple, so should be working when all the other pieces are working.
+  					- Still needs testing however
+
+*/
 
   function jesterCheck(r, c, tempr, tempc, someBoard){
   	
@@ -254,7 +256,7 @@ function computeKingMoves (r, c, player, someBoard){
 	FUNCTION PURPOSE - Computes the possible moves of the minister
 
 	FUNCTION STATUS - Works perfectly
-	*/
+*/
 
 	function computeMinisterMoves ( r, c, player, someBoard) {
 
@@ -291,7 +293,7 @@ function computeKingMoves (r, c, player, someBoard){
 	FUNCTION PURPOSE - Computes the possible moves of the Rook
 
 	FUNCTION STATUS - Works perfectly
-	*/
+*/
 
 	function computeRookMoves ( r, c, player, someBoard) {
 
@@ -316,7 +318,9 @@ function computeKingMoves (r, c, player, someBoard){
 
 /* 	FUNCTION PURPOSE - Calculates all the valid diagonal moves for an arrow
 
-FUNCTION STATUS - Works perfectly*/
+FUNCTION STATUS - Works perfectly
+
+*/
 function computeArrowMoves (r, c, player, someBoard) {
 
 	var tempSquares = [];
@@ -338,7 +342,11 @@ function computeArrowMoves (r, c, player, someBoard) {
 	return tempSquares;
 };
 
-/* TODO : Compute the River Capturing Mechanism. Actually code all of the Rivers.*/
+/* 
+
+	TODO : Compute the River Capturing Mechanism. Actually code all of the Rivers.
+
+*/
 
 function computeGreaterRiverMoves (r, c, player, someBoard) {
 	return computeKingMoves(r, c, player, someBoard);
@@ -354,21 +362,25 @@ function computeGreaterRiverThreats (r, c, player, someBoard){
 
 	return tempSquares;
 }
-/*
-function GreaterRiverFlood (eliminate, player, someBoard){
-	var position = positionOf("GR", someBoard, player);
+
+
+function GreaterRiverFlood (r, c, eliminate, player, someBoard){
 
 	for(var a = 0; a < 12 ; a++){
 		if(eliminate === "r"){
 			
-			someBoard[position.row][a] =
+			someBoard[r][a].symbol = "#";
+			someBoard[r][a].symbol = "0";
+		} else if (eliminate === "c"){
+			someBoard[a][c].symbol = "#";
+			someBoard[a][c].symbol = "0";
 		}
 
 		pushSquares(a, c, tempSquares, player);
 	}
 
 }
-*/
+
 function computeLesserRiverMoves (r, c, player, someBoard) {
 	return computeKingMoves(r, c, player, someBoard);
 }

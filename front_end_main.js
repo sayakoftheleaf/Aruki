@@ -104,10 +104,36 @@ function setupBoard(){
 };
 
 function cssSquare(){
+	$(".Game").css({
+		"display": "inline-block"
+	});
+
+	$(".Captured").css({
+		"display" : "inline-block",
+		"margin-top": "50px",
+		"position": "fixed",
+		"margin-left": "20px",
+	});
+
+	$(".White").css({
+		"height" : "150px",
+		"width" : "250px",
+		"background-color" : "#BE9253",
+		"border" :  "4px solid #9F6614",
+		"margin-bottom" : "100px"
+	});
+
+	$(".Black").css({
+		"height" : "150px",
+		"width" : "250px",
+		"background-color" : "#BE9253",
+		"border" : "4px solid #9F6614"
+	});
+
 	$(".Board").css({
 		"line-height": "0px",
 		"background-image": "url(Files/Board_sample.png)",
-		"background-repeat": "no-repeat"
+		"background-repeat": "no-repeat", 
 	});
 
 	$(".Square").css({
@@ -158,203 +184,213 @@ function refreshSquares(deletenodes){
 
 		rowflag = !rowflag;
 	}
-}
+};
+
+function refreshCaptured(CapturedPieces){
+	$(".White").append()
+};
 
 function putPieces(someBoard){
 	for(var row = 0 ; row < 12; row++){
 		for(var col = 0 ; col < 12; col++){
-			
 			var classstr = ".Row" + row + " .Col" + col;
-			$(classstr).append("<div class=\"Piece\"></div>");
-			$(".Piece").css({
-				"height" : "32px",
-				"width":"32px", 
-				"margin":"auto", 
-				"margin-top":"6px"});
-
 			var symb = someBoard[row][col].symbol;
 			var player = someBoard[row][col].player;
 
-			if (symb === "K"){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -192px -32px",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -192px -32px",
-					});
-				}
+			drawPieces(classstr, symb, player, someBoard);
 
-			}
-			else if (symb.includes("J")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -64px -32px",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -64px -32px",
-					});
-				}
-			}
-			else if (symb === "MI"){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -96px -32px",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -96px -32px",
-					});
-				}
-			}
-			else if (symb.includes("Z")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -32px -32px",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -32px -32px",
-					});
-				}
-			}
-			else if (symb.includes("A")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -128px 0",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -128px 0",
-					});
-				}
-			}
-			else if (symb === "GR"){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -32px 0",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -32px 0",
-					});
-				}
-			}
-			else if (symb === "LR"){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') 0 0",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') 0 0",
-					});
-				}
-			}	
-			else if (symb.includes("R")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -160px -32px",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -160px -32px",
-					});
-				}
-			}
-			else if (symb.includes("PP")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -64px 0",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -64px 0",
-					});
-				}
-			}
-			else if (symb.includes("P")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -96px 0",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -96px 0",
-					});
-				}
-			}
-			else if (symb.includes("LL")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -192px 0",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -192px 0",
-					});
-				}
-			}
-			else if (symb.includes("L")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -224px 0",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -224px 0",
-					});
-				}
-			}
-			else if (symb.includes("SS")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') 0 -32px",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png')  0 -32px",
-					});
-				}
-
-			}
-			else if (symb.includes("S")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') 0 -32px",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png')  0 -32px",
-					});
-				}
-			}
-			else if (symb.includes("N")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png')-128px -32px",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -128px -32px",
-					});
-				}
-			}
 		}
 	}
+
 };
 
-function highlightpieces(moves){
+function drawPieces(classstr, symb, player, someBoard){
+
 	
+	$(classstr).append("<div class=\"Piece\"></div>");
+	$(".Piece").css({
+		"height" : "32px",
+		"width":"32px", 
+		"margin":"auto", 
+		"margin-top":"6px"});
+
+	if (symb === "K"){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -192px -32px",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -192px -32px",
+			});
+		}
+
+	}
+	else if (symb.includes("J")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -64px -32px",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -64px -32px",
+			});
+		}
+	}
+	else if (symb === "MI"){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -96px -32px",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -96px -32px",
+			});
+		}
+	}
+	else if (symb.includes("Z")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -32px -32px",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -32px -32px",
+			});
+		}
+	}
+	else if (symb.includes("A")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -128px 0",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -128px 0",
+			});
+		}
+	}
+	else if (symb === "GR"){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -32px 0",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -32px 0",
+			});
+		}
+	}
+	else if (symb === "LR"){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') 0 0",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') 0 0",
+			});
+		}
+	}	
+	else if (symb.includes("R")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -160px -32px",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -160px -32px",
+			});
+		}
+	}
+	else if (symb.includes("PP")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -64px 0",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -64px 0",
+			});
+		}
+	}
+	else if (symb.includes("P")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -96px 0",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -96px 0",
+			});
+		}
+	}
+	else if (symb.includes("LL")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -192px 0",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -192px 0",
+			});
+		}
+	}
+	else if (symb.includes("L")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') -224px 0",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -224px 0",
+			});
+		}
+	}
+	else if (symb.includes("SS")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') 0 -32px",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png')  0 -32px",
+			});
+		}
+
+	}
+	else if (symb.includes("S")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png') 0 -32px",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png')  0 -32px",
+			});
+		}
+	}
+	else if (symb.includes("N")){
+		if (player === 1){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/White_sprites.png')-128px -32px",
+			});
+		} else if (player === 2){
+			$(classstr + " .Piece").css({
+				"background" : "url('Files/Black_sprites.png') -128px -32px",
+			});
+		}
+	}
+}
+
+function highlightpieces(moves){
 	for (var a = 0; a < moves.length; a++){
 		var divstring = ".Row" + moves[a].row + " .Col" + moves[a].col;
 		$(divstring).css({"border-color":"#ffd11aff"
 	});
 	}
-}
+};
 
-//Brown - #9F6614
+// Brown - #9F6614
 // Yellow - #BE9253
 // Borders - #997E5A

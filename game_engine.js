@@ -137,7 +137,7 @@ function computeEvolution(symbol1, symbol2){
 		return "MI";
 };
 
-/* TODO : Figure out how to do promotions*/
+/* TODO : Figure out how to do promotions */
 function isValidPromotion() {
 
 };
@@ -171,7 +171,8 @@ function checkForCheck(someBoard, player){
 /* 	FUNCTION PURPOSE - Finds out if the move is within the board
 
 	FUNCTION STATUS - WORKING AS INTENDED
-	*/
+*/
+
 	function withinBoard(someRow, someCol) {
 
 		if ((someRow <= 11) && (someRow >= 0)) {
@@ -191,7 +192,8 @@ function checkForCheck(someBoard, player){
 	RETURNTYPE : OBJECT
 
 	FUNCTION STATUS - WORKING AS INTENDED.
-	*/
+*/
+
 	function positionOf(symb, someBoard, player) {
 
 	//print_board(someBoard);
@@ -201,7 +203,7 @@ function checkForCheck(someBoard, player){
 	for ( var a = 0; a <= 11; a++) {
 		for (var b = 0; b <= 11; b++) {
 			
-			if ( symb === someBoard[a][b].symbol && player === someBoard[a][b].player){
+			if (someBoard[a][b].symbol.includes(symb) && player === someBoard[a][b].player){
 
 				tempSq.row = a;
 				tempSq.col = b;
