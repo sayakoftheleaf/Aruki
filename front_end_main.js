@@ -212,7 +212,9 @@ function drawPieces(classstr, symb, player, someBoard){
 		"height" : "32px",
 		"width":"32px", 
 		"margin":"auto", 
-		"margin-top":"6px"});
+		"margin-top":"2px",
+		"box-shadow":"0 2px 0 0 #444444, 0 2px 2px 0 #111111AA, 0 2px 4px 0 #111111AA"
+		});
 
 	if (symb === "K"){
 		if (player === 1){
