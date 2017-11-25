@@ -247,7 +247,7 @@ function putPieces(someBoard){
 					});
 				}
 			}
-			else if (symb.includes("L")){
+			else if (symb.includes("PP")){
 				if (player === 1){
 					$(classstr + " .Piece").css({
 						"background" : "url('Files/White_sprites.png') -64px 0",
@@ -261,22 +261,11 @@ function putPieces(someBoard){
 			else if (symb.includes("P")){
 				if (player === 1){
 					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -224px 0",
+						"background" : "url('Files/White_sprites.png') -96px 0",
 					});
 				} else if (player === 2){
 					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -224px 0",
-					});
-				}
-			}
-			else if (symb.includes("PP")){
-				if (player === 1){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') -64px 0",
-					});
-				} else if (player === 2){
-					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png') -64px 0",
+						"background" : "url('Files/Black_sprites.png') -96px 0",
 					});
 				}
 			}
@@ -291,14 +280,14 @@ function putPieces(someBoard){
 					});
 				}
 			}
-			else if (symb.includes("S")){
+			else if (symb.includes("L")){
 				if (player === 1){
 					$(classstr + " .Piece").css({
-						"background" : "url('Files/White_sprites.png') 0 -32px",
+						"background" : "url('Files/White_sprites.png') -224px 0",
 					});
 				} else if (player === 2){
 					$(classstr + " .Piece").css({
-						"background" : "url('Files/Black_sprites.png')  0 -32px",
+						"background" : "url('Files/Black_sprites.png') -224px 0",
 					});
 				}
 			}
@@ -313,6 +302,17 @@ function putPieces(someBoard){
 					});
 				}
 
+			}
+			else if (symb.includes("S")){
+				if (player === 1){
+					$(classstr + " .Piece").css({
+						"background" : "url('Files/White_sprites.png') 0 -32px",
+					});
+				} else if (player === 2){
+					$(classstr + " .Piece").css({
+						"background" : "url('Files/Black_sprites.png')  0 -32px",
+					});
+				}
 			}
 			else if (symb.includes("N")){
 				if (player === 1){
