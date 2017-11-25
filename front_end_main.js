@@ -61,6 +61,7 @@ function highlightcontrol(square, playermove, selected, tempSquares){
 				playermove = 1;
 			
 			refreshSquares(true);
+			refreshCaptured(capturedPieces);
 			putPieces(row);
 			return [playermove, selected, []];
 		} else if (row[numrow][numcol].symbol === "#"){
@@ -177,18 +178,22 @@ function refreshSquares(deletenodes){
 					$(divstring).empty();
 
 			}
-
-
 			color = !color
 		}
-
 		rowflag = !rowflag;
 	}
 };
 
-function refreshCaptured(CapturedPieces){
-	$(".White").append()
+function refreshCaptured(CapturedPieces, someBoard){
+	for (var p1 = 0; p1 < CapturedPieces.player1.length; p1++) {
+		drawPieces(".White", CapturedPieces.player1[p1], 1, someBoard);
+	}
+
+	for (var p2 = 0; p2 < CapturedPieces.player2.length; p2++) {
+		drawPieces(".Black", CapturedPieces.player2[p2], 2, someBoard);
+	}
 };
+
 
 function putPieces(someBoard){
 	for(var row = 0 ; row < 12; row++){
@@ -206,7 +211,6 @@ function putPieces(someBoard){
 
 function drawPieces(classstr, symb, player, someBoard){
 
-	
 	$(classstr).append("<div class=\"Piece\"></div>");
 	$(".Piece").css({
 		"height" : "32px",
@@ -214,7 +218,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		"margin":"auto", 
 		"margin-top":"6px"});
 
-	if (symb === "K"){
+	if(symb === "#"){
+		$(classstr).empty();
+	}
+	else if (symb === "K"){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background" : "url('Files/White_sprites.png') -192px -32px",
