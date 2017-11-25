@@ -364,7 +364,7 @@ function computeGreaterRiverThreats (r, c, player, someBoard){
 }
 
 
-function GreaterRiverFlood (r, c, eliminate, player, someBoard){
+function GreaterRiverFlood (r, c, eliminate, someBoard){
 
 	for(var a = 0; a < 12 ; a++){
 		if(eliminate === "r"){
@@ -375,10 +375,7 @@ function GreaterRiverFlood (r, c, eliminate, player, someBoard){
 			someBoard[a][c].symbol = "#";
 			someBoard[a][c].symbol = "0";
 		}
-
-		pushSquares(a, c, tempSquares, player);
 	}
-
 }
 
 function computeLesserRiverMoves (r, c, player, someBoard) {
