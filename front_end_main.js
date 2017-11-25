@@ -185,12 +185,25 @@ function refreshSquares(deletenodes){
 };
 
 function refreshCaptured(CapturedPieces, someBoard){
+	classstr = ".Captured .White"
+	$(classstr).empty();
 	for (var p1 = 0; p1 < CapturedPieces.player1.length; p1++) {
-		drawPieces(".White", CapturedPieces.player1[p1], 1, someBoard);
+		posstr = "Pos" + p1;
+		$(".White").append("<div class=\"" + posstr + "\"></div>");
+		classstr = ".White ." + posstr;
+		$(classstr).css({"display":"inline-block",
+						"margin-left" : "5px"})
+		drawPieces(classstr, CapturedPieces.player1[p1], 1, someBoard);
 	}
 
+	$(".Black").empty();
 	for (var p2 = 0; p2 < CapturedPieces.player2.length; p2++) {
-		drawPieces(".Black", CapturedPieces.player2[p2], 2, someBoard);
+		posstr = "Pos" + p2;
+		$(".Black").append("<div class=\"" + posstr + "\"></div>");
+		classstr = ".Black ." + posstr;
+		$(classstr).css({"display":"inline-block",
+						"margin-left" : "5px"})
+		drawPieces(classstr, CapturedPieces.player2[p2], 2, someBoard);
 	}
 };
 
@@ -201,9 +214,7 @@ function putPieces(someBoard){
 			var classstr = ".Row" + row + " .Col" + col;
 			var symb = someBoard[row][col].symbol;
 			var player = someBoard[row][col].player;
-
 			drawPieces(classstr, symb, player, someBoard);
-
 		}
 	}
 

@@ -19,7 +19,7 @@
     // white move 2
     firstpawn = positionOf("Z5", newboard, 1);
     somemove = computePawnMoves(firstpawn.row, firstpawn.col, 1, newboard);
-     makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, 1, newboard);
+    makeNonCaptureMove(firstpawn.row, firstpawn.col, somemove[0].row, somemove[0].col, 1, newboard);
         
     print_board(newboard);
     //console.log(capturedPieces);

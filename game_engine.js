@@ -42,10 +42,21 @@ function makemove(){
 function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, player, moveBoard) {
 
 	if (moveBoard[newrow][newcol].player != player && moveBoard[newrow][newcol].player != 0){
-		if (player === 1){
-			capturedPieces.player1 = capturedPieces.player1.concat(moveBoard[newrow][newcol].symbol);	
-		} else if (player === 2){
-		capturedPieces.player1 = capturedPieces.player2.concat(moveBoard[newrow][newcol].symbol);
+		if (!
+			   (moveBoard[newrow][newcol].symbol.includes("J") || 
+				moveBoard[newrow][newcol].symbol.includes("GR") || 
+				moveBoard[newrow][newcol].symbol.includes("LR") ||
+				moveBoard[newrow][newcol].symbol.includes("N") ||
+				moveBoard[newrow][newcol].symbol.includes("SS") ||
+				moveBoard[newrow][newcol].symbol.includes("MI"))){
+			if (player === 1){
+				capturedPieces.player1 = capturedPieces.player1.concat(moveBoard[newrow][newcol].symbol);
+				console.log(capturedPieces);
+
+			} else if (player === 2){
+				capturedPieces.player2 = capturedPieces.player2.concat(moveBoard[newrow][newcol].symbol);
+				console.log(capturedPieces);
+			}
 		}
 	} 
 
@@ -61,54 +72,54 @@ function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, player, moveBoard) 
 	looks a little unnecessary to me. Every time you check if a move is valid,
 	you check for checks.*/
 
-function pushSquares(tempr, tempc, tSquares, player){
+	function pushSquares(tempr, tempc, tSquares, player){
 
-	var tempsq = {
+		var tempsq = {
 			row : tempr,
 			col : tempc
+		};
+
+		tSquares.push(tempsq);
 	};
 
-	tSquares.push(tempsq);
-};
+	function isValidMove(symb, r, c, dr, dc, formalBoard, tempSquares){
+		var flag = true;
 
-function isValidMove(symb, r, c, dr, dc, formalBoard, tempSquares){
-	var flag = true;
-	
-	flag = withinBoard(dr,dc);
-	
-	if (!flag){
-		return false;
-	}
-	
-	flag = false;
-	for (var i = 0; i < tempSquares.length; i++){
-		if ((dr === tempSquares[i].row) && (dc === tempSquares[i].col))
-			flag = true;
-	}
+		flag = withinBoard(dr,dc);
 
-	if (!flag)
-		return false;
-	else 
-		return true;
-};
+		if (!flag){
+			return false;
+		}
 
-function evolvePiece(r, c, symbol1, symbol2, someBoard){
+		flag = false;
+		for (var i = 0; i < tempSquares.length; i++){
+			if ((dr === tempSquares[i].row) && (dc === tempSquares[i].col))
+				flag = true;
+		}
 
-	if(someBoard[r][c].symbol.includes(symbol1)){
+		if (!flag)
+			return false;
+		else 
+			return true;
+	};
 
-		var tempcaptures = someBoard[r][c].player === 1? capturedPieces.player1 : capturedPieces.player2;
+	function evolvePiece(r, c, symbol1, symbol2, someBoard){
 
-		for(var a = 0; a < tempcaptures.length; a++){
+		if(someBoard[r][c].symbol.includes(symbol1)){
 
-			if(tempcaptures[a].includes(symbol2)){
-				someBoard[r][c].symbol = computeEvolution(symbol1, symbol2);
-				tempcatures = tempcaptures.slice(a, 1);
+			var tempcaptures = someBoard[r][c].player === 1? capturedPieces.player1 : capturedPieces.player2;
+
+			for(var a = 0; a < tempcaptures.length; a++){
+
+				if(tempcaptures[a].includes(symbol2)){
+					someBoard[r][c].symbol = computeEvolution(symbol1, symbol2);
+					tempcatures = tempcaptures.slice(a, 1);
+				}
 			}
 		}
-	}
-};
+	};
 
-function computeEvolution(symbol1, symbol2){
+	function computeEvolution(symbol1, symbol2){
 	// greater pike evolution
 	if	(symbol1.includes("P") && symbol2.includes("P"))
 		return "PP";
@@ -171,7 +182,7 @@ function checkForCheck(someBoard, player){
 /* 	FUNCTION PURPOSE - Finds out if the move is within the board
 
 	FUNCTION STATUS - WORKING AS INTENDED
-*/
+	*/
 
 	function withinBoard(someRow, someCol) {
 
@@ -192,7 +203,7 @@ function checkForCheck(someBoard, player){
 	RETURNTYPE : OBJECT
 
 	FUNCTION STATUS - WORKING AS INTENDED.
-*/
+	*/
 
 	function positionOf(symb, someBoard, player) {
 
