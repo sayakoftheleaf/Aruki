@@ -110,25 +110,29 @@ function setupBoard(){
 };
 
 function cssSquare(){
+	/*
 	$(".Game").css({
 		"display": "inline-block",
 		"vertical-align": "top",
 	});
-
+	*/
+	/*
 	$(".Captured").css({
 		"display" : "inline-block",
 		"margin-top": "50px",
 		"vertical-align": "top",
 		"margin-left": "20px",
 	});
-
+	*/
+	/*
 	$(".White").css({
 		"height" : "150px",
 		"width" : "250px",
 		"background-color" : "#BE9253",
 		"border" :  "4px solid #9F6614"
 	});
-
+	*/
+	/*
 	$(".Black").css({
 		"height" : "150px",
 		"width" : "250px",
@@ -136,13 +140,15 @@ function cssSquare(){
 		"background-color" : "#BE9253",
 		"border" : "4px solid #9F6614"
 	});
-
+	*/
+	/*
 	$(".Board").css({
 		"line-height": "0px",
 		"background-image": "url(Files/Board_sample.png)",
 		"background-repeat": "no-repeat", 
 	});
-
+	*/
+	/*
 	$(".Square").css({
 		"border" : "4px solid #997E5A00",
 		"height":"48px",
@@ -150,6 +156,7 @@ function cssSquare(){
 		"display":"inline-block",
 		"box-sizing": "border-box"
 	});
+	*/
 
 };
 
@@ -457,7 +464,7 @@ function drawPieces(classstr, symb, player, someBoard){
 function highlightpieces(moves){
 	for (var a = 0; a < moves.length; a++){
 		var divstring = ".Row" + moves[a].row + " .Col" + moves[a].col;
-		$(divstring).addClass({"border-color":"#ffd11aff"
+		$(divstring).css({"border-color":"#ffd11aff"
 	});
 	}
 };
