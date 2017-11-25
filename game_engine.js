@@ -35,6 +35,8 @@ var presentmove = 1;
 
 var capturedPieces = {player1 : [], player2 : []};
 
+var playermove = 1;
+
 function makemove(){
 
 }
@@ -43,7 +45,7 @@ function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, player, moveBoard) 
 
 	if (moveBoard[newrow][newcol].player != player && moveBoard[newrow][newcol].player != 0){
 		if (!
-			   (moveBoard[newrow][newcol].symbol.includes("J") || 
+			(moveBoard[newrow][newcol].symbol.includes("J") || 
 				moveBoard[newrow][newcol].symbol.includes("GR") || 
 				moveBoard[newrow][newcol].symbol.includes("LR") ||
 				moveBoard[newrow][newcol].symbol.includes("N") ||
@@ -65,6 +67,21 @@ function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, player, moveBoard) 
 	moveBoard[oldrow][oldcol].player = 0;
 	moveBoard[oldrow][oldcol].symbol = "#";	
 };
+
+function removeCaptured(symb, player){
+
+	if(player === 1)
+		tempobj = capturedPieces.player1;
+	else if (player === 2)
+		tempobj = capturedPieces.player2;
+
+	for(var a = 0; a <= tempobj.length; a++){
+		if (tempobj[a].includes(symb)){
+			tempobj.splice(a,1);
+			return;
+		}
+	}
+}
 
 /* 	TODO : Cancel out the moves that cause checks if they are actually played.*/
 
@@ -120,6 +137,8 @@ function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, player, moveBoard) 
 	};
 
 	function computeEvolution(symbol1, symbol2){
+		console.log("symbol1 is " + symbol1);
+		console.log("symbol2 is " + symbol2);
 	// greater pike evolution
 	if	(symbol1.includes("P") && symbol2.includes("P"))
 		return "PP";
@@ -222,5 +241,13 @@ function checkForCheck(someBoard, player){
 			}
 		}
 	}
+
+};
+
+function flipplayermove(){
+	if (playermove === 1) 
+		playermove = 2;
+	else if (playermove === 2)
+		playermove = 1;
 
 };

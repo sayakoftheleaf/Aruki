@@ -553,23 +553,23 @@ function computeSwordMoves (r, c, player, someBoard){
 		var blockedFlag;
 
 	//case 1
-	tempr = r;
-	tempc = c - 1;
+	tempr = r - 1;
+	tempc = c;
 	checkKing(r, c, tempr, tempc, tempSquares, player, someBoard)
 
 	//case 2
-	tempr = r;
-	tempc = c - 2;
+	tempr = r - 2;
+	tempc = c;
 	checkKing(r, c, tempr, tempc, tempSquares, player, someBoard)
 
 	//case 3
-	tempr = r;
-	tempc = c - 1;
+	tempr = r + 1;
+	tempc = c;
 	checkKing(r, c, tempr, tempc, tempSquares, player, someBoard)
 
 	//case 1
-	tempr = r;
-	tempc = c - 2;
+	tempr = r + 2;
+	tempc = c;
 	checkKing(r, c, tempr, tempc, tempSquares, player, someBoard)
 
 	return tempSquares;

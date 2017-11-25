@@ -1,3 +1,5 @@
+var captured = "#";
+
 $(document).ready(function(){
 
 	create_board(row);
@@ -8,8 +10,6 @@ $(document).ready(function(){
 	refreshSquares(false);
 	putPieces(row);
 
-	var playermove = 1;
-	var captured = "#";
 	var selected = {
 		symbol : "#",
 		row : -1,
@@ -18,18 +18,14 @@ $(document).ready(function(){
 	var tempSquares = [];
 	
 	$(".Square").click(function(){
-		temp = highlightcontrol($(this), playermove, selected, captured, tempSquares);
-		playermove = temp[0];
-		selected = temp[1];
-		tempSquares = temp[2];
+		temp = highlightcontrol($(this), selected, tempSquares);
+		selected = temp[0];
+		tempSquares = temp[1];
 	});
 
-	$(".Captured .Piece").click(function(){
-
-	});
 });
 
-function highlightcontrol(square, playermove, selected, captured, tempSquares){
+function highlightcontrol(square, selected, tempSquares){
 	var Row = square.parent().attr('class');
 	var Col = square.attr('class');
 	Row = Row.substring(3);
@@ -38,8 +34,19 @@ function highlightcontrol(square, playermove, selected, captured, tempSquares){
 	var numrow = Number(Row);
 	var numcol = Number(Col);
 
-	if(selected.symbol === "#"){
-		console.log("clicked empty");
+	if(captured != "#"){
+		console.log("here");
+		newsymb = computeEvolution(captured, row[numrow][numcol].symbol);
+		row[numrow][numcol].symbol = newsymb;
+		removeCaptured(captured, playermove);
+		captured = "#";
+		refreshSquares(true);
+		putPieces(row);
+		refreshCaptured(capturedPieces, row);
+		flipplayermove();
+		return [selected, []];
+	}
+	else if(selected.symbol === "#"){
 		var symb = row[numrow][numcol].symbol;
 
 		if(row[numrow][numcol].player === playermove){
@@ -50,31 +57,25 @@ function highlightcontrol(square, playermove, selected, captured, tempSquares){
 			refreshSquares(false);
 			tempSquares = computeMoves(symb, numrow, numcol, row);
 			highlightpieces(tempSquares);
-			return [playermove, selected, tempSquares];
-		} else return [playermove, selected, tempSquares];
+			return [selected, tempSquares];
+		} else return [selected, tempSquares];
 	} else {
-		console.log(" in else");
 		if (isValidMove(selected.symbol, selected.row, selected.col, numrow, numcol, row, tempSquares)){
 			makeNonCaptureMove (selected.row, selected.col, numrow, numcol, playermove, row);
 			selected.symbol = "#";
 			selected.row = -1;
 			selected.col = -1;
 
-			if (playermove === 1) 
-				playermove = 2;
-			else if (playermove === 2)
-				playermove = 1;
-			
+			flipplayermove();
+
 			refreshSquares(true);
-			refreshCaptured(capturedPieces);
+			refreshCaptured(capturedPieces, row);
 			putPieces(row);
-			return [playermove, selected, []];
+			return [selected, []];
 		} else if (row[numrow][numcol].symbol === "#"){
-			console.log("detected blank");
-			return [playermove, selected, []];
+			return [selected, []];
 		} else if (row[numrow][numcol].player === playermove){
 
-			console.log("detected diff");
 			selected.symbol = row[numrow][numcol].symbol;
 			selected.row = numrow;
 			selected.col = numcol;
@@ -82,14 +83,13 @@ function highlightcontrol(square, playermove, selected, captured, tempSquares){
 			refreshSquares(false);
 			tempSquares = computeMoves(selected.symbol, selected.row, selected.col, row);
 			highlightpieces(tempSquares);
-			return [playermove, selected, tempSquares];
+			return [selected, tempSquares];
 		} else {
-			console.log("detected opponent piece");
 			refreshSquares(false);
 			selected.symbol = "#";
 			selected.row = -1;
 			selected.col = -1;
-			return [playermove, selected, []];
+			return [selected, []];
 		}
 	}
 }
@@ -210,6 +210,22 @@ function refreshCaptured(CapturedPieces, someBoard){
 						"margin-left" : "5px"})
 		drawPieces(classstr, CapturedPieces.player2[p2], 2, someBoard);
 	}
+
+	$(".Captured .Piece").click(function(){
+		var temp = $(this).parent().attr('class');
+		temp = temp.substring(3);
+		temp = Number(temp);
+
+		var clickedplayer = $(this).parent().parent().attr('class');
+
+		if (clickedplayer === "White" && playermove === 1){
+			console.log("changing captured1");
+			captured = capturedPieces.player1[temp];
+		} else if (clickedplayer === "Black" && playermove === 2){
+			console.log("changing captured2");
+			captured = capturedPieces.player2[temp];
+		}	
+	});
 };
 
 
@@ -236,6 +252,7 @@ function drawPieces(classstr, symb, player, someBoard){
 	if(symb === "#"){
 		$(classstr).empty();
 	}
+
 	else if (symb === "K"){
 		if (player === 1){
 			$(classstr + " .Piece").css({
