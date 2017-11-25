@@ -9,6 +9,7 @@ $(document).ready(function(){
 	putPieces(row);
 
 	var playermove = 1;
+	var captured = "#";
 	var selected = {
 		symbol : "#",
 		row : -1,
@@ -17,14 +18,18 @@ $(document).ready(function(){
 	var tempSquares = [];
 	
 	$(".Square").click(function(){
-		temp = highlightcontrol($(this), playermove, selected, tempSquares);
+		temp = highlightcontrol($(this), playermove, selected, captured, tempSquares);
 		playermove = temp[0];
 		selected = temp[1];
 		tempSquares = temp[2];
 	});
+
+	$(".Captured .Piece").click(function(){
+
+	});
 });
 
-function highlightcontrol(square, playermove, selected, tempSquares){
+function highlightcontrol(square, playermove, selected, captured, tempSquares){
 	var Row = square.parent().attr('class');
 	var Col = square.attr('class');
 	Row = Row.substring(3);
@@ -120,13 +125,13 @@ function cssSquare(){
 		"height" : "150px",
 		"width" : "250px",
 		"background-color" : "#BE9253",
-		"border" :  "4px solid #9F6614",
-		"margin-bottom" : "100px"
+		"border" :  "4px solid #9F6614"
 	});
 
 	$(".Black").css({
 		"height" : "150px",
 		"width" : "250px",
+		"margin-bottom" : "100px",
 		"background-color" : "#BE9253",
 		"border" : "4px solid #9F6614"
 	});
@@ -226,11 +231,6 @@ function drawPieces(classstr, symb, player, someBoard){
 	$(".Piece").css({
 		"height" : "32px",
 		"width":"32px", 
-		//"margin":"auto", 
-		//"margin-top":"2px",
-		//"box-shadow":"0 2px 0 0 #444444, 0 2px 2px 0 #111111AA, 0 2px 4px 0 #111111AA",
-		//"border-radius":"2px",
-		//"background-color":"grey"
 		});
 
 	if(symb === "#"){
