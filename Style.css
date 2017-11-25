@@ -1,8 +1,6 @@
-
 body{
 	background:#252525;
 }
-
 .Wrapper{
 	display: inline-block;
 	margin: 48px;
@@ -58,11 +56,11 @@ body{
 	box-shadow:0 2px 0 0 #444444, 0 2px 2px 0 #111111AA, 0 2px 4px 0 #111111AA;
 	border-radius:2px;
 }
-.Piece .player1{
+.Piece.player1{
 	background-color:lightgrey;
 	box-shadow:0 2px 0 0 grey, 0 2px 2px 0 #111111AA, 0 2px 4px 0 #111111AA;
 }
-.Piece .player2{
+.Piece.player2{
 	background-color:grey;
 	box-shadow:0 2px 0 0 #444444, 0 2px 2px 0 #111111AA, 0 2px 4px 0 #111111AA;
 }
