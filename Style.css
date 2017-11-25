@@ -1,10 +1,71 @@
 
+body{
+	background:#252525;
+}
+
 .Wrapper{
 	display: inline-block;
+	margin: 48px;
+}
+
+.Board{
+	border-radius: 2px;
+	line-height: 0px;
+	background-image: url(Files/Board_sample.png);
+	background-repeat: no-repeat;
+	box-shadow: 0 8px 0 0 #111111, 0 8px 2px 0 #111111AA, 0 8px 4px 0 #111111AA, 0 8px 16px 0 #111111AA;
+}
+.Square{
+	border : 4px solid #997E5A00;
+	height:48px;
+	width:48px;
+	display:inline-block;
+	box-sizing: border-box;
+	transition: outline 0.2s;
+	outline: 0px solid darkslategrey;
+}
+.Square:hover{
+	outline: 0px solid darkslategrey;
+	transition: outline 0.2s;
+}
+.Black, .White{
+	height : 150px;
+	width : 250px;
+	background-color : darkslategrey;
+	border : 0px solid #9F6614;
+}
+.Black {
+	margin-bottom : 100px;
+}
+.Captured{
+	display : inline-block;
+	margin-top: 50px;
+	vertical-align: top;
+	margin-left: 20px;
+}
+.Game{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.Captured > div{
+	box-shadow: 0 8px 0 0 #112222, 0 8px 2px 0 #111111AA, 0 8px 4px 0 #111111AA, 0 8px 16px 0 #111111AA;
+	border-radius: 2px;
 }
 .Piece{
 	margin:auto;
 	margin-top:2px;
 	box-shadow:0 2px 0 0 #444444, 0 2px 2px 0 #111111AA, 0 2px 4px 0 #111111AA;
 	border-radius:2px;
+}
+.Piece .player1{
+	background-color:lightgrey;
+	box-shadow:0 2px 0 0 grey, 0 2px 2px 0 #111111AA, 0 2px 4px 0 #111111AA;
+}
+.Piece .player2{
+	background-color:grey;
+	box-shadow:0 2px 0 0 #444444, 0 2px 2px 0 #111111AA, 0 2px 4px 0 #111111AA;
+}
+.ValidMove{
+	border-color:#ffd11aff;
 }

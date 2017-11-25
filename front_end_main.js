@@ -110,24 +110,29 @@ function setupBoard(){
 };
 
 function cssSquare(){
+	/*
 	$(".Game").css({
-		"display": "inline-block"
+		"display": "inline-block",
+		"vertical-align": "top",
 	});
-
+	*/
+	/*
 	$(".Captured").css({
 		"display" : "inline-block",
 		"margin-top": "50px",
-		"position": "fixed",
+		"vertical-align": "top",
 		"margin-left": "20px",
 	});
-
+	*/
+	/*
 	$(".White").css({
 		"height" : "150px",
 		"width" : "250px",
 		"background-color" : "#BE9253",
 		"border" :  "4px solid #9F6614"
 	});
-
+	*/
+	/*
 	$(".Black").css({
 		"height" : "150px",
 		"width" : "250px",
@@ -135,13 +140,15 @@ function cssSquare(){
 		"background-color" : "#BE9253",
 		"border" : "4px solid #9F6614"
 	});
-
+	*/
+	/*
 	$(".Board").css({
 		"line-height": "0px",
 		"background-image": "url(Files/Board_sample.png)",
 		"background-repeat": "no-repeat", 
 	});
-
+	*/
+	/*
 	$(".Square").css({
 		"border" : "4px solid #997E5A00",
 		"height":"48px",
@@ -149,6 +156,7 @@ function cssSquare(){
 		"display":"inline-block",
 		"box-sizing": "border-box"
 	});
+	*/
 
 };
 
@@ -247,8 +255,10 @@ function drawPieces(classstr, symb, player, someBoard){
 	$(".Piece").css({
 		"height" : "32px",
 		"width":"32px", 
-		});
-
+	});
+	
+	$(classstr + " .Piece").addClass("player"+player);
+	
 	if(symb === "#"){
 		$(classstr).empty();
 	}
@@ -257,12 +267,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -274,12 +282,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -291,12 +297,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -307,12 +311,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -323,12 +325,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -339,12 +339,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -355,12 +353,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -371,12 +367,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -387,12 +381,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -403,12 +395,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -419,12 +409,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -435,12 +423,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -451,12 +437,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -468,12 +452,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
@@ -484,12 +466,10 @@ function drawPieces(classstr, symb, player, someBoard){
 		if (player === 1){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/White_sprites.png')",
-				"background-color":"lightgrey"
 			});
 		} else if (player === 2){
 			$(classstr + " .Piece").css({
 				"background-image" : "url('Files/Black_sprites.png')",
-				"background-color":"grey"
 			});
 		}
 		$(classstr + " .Piece").css({
