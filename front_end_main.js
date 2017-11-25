@@ -111,13 +111,14 @@ function setupBoard(){
 
 function cssSquare(){
 	$(".Game").css({
-		"display": "inline-block"
+		"display": "inline-block",
+		"vertical-align": "top",
 	});
 
 	$(".Captured").css({
 		"display" : "inline-block",
 		"margin-top": "50px",
-		"position": "fixed",
+		"vertical-align": "top",
 		"margin-left": "20px",
 	});
 
@@ -456,7 +457,7 @@ function drawPieces(classstr, symb, player, someBoard){
 function highlightpieces(moves){
 	for (var a = 0; a < moves.length; a++){
 		var divstring = ".Row" + moves[a].row + " .Col" + moves[a].col;
-		$(divstring).css({"border-color":"#ffd11aff"
+		$(divstring).addClass({"border-color":"#ffd11aff"
 	});
 	}
 };
