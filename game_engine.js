@@ -1,26 +1,3 @@
-/*
-
-	TODO : Figure out if you actually need this
-function init_pieces(){
-	allpieces["K"] = new piece;
-	allpieces["J"] = new piece;
-	allpieces["MI"] = new piece;
-	allpieces["R"] = new piece;
-	allpieces["Z"] = new piece;
-	allpieces["A"] = new piece;
-	allpieces["GR"] = new piece;
-	allpieces["LR"] = new piece;
-	allpieces["L"] = new piece;
-	allpieces["P"] = new piece;
-	allpieces["PP"] = new piece;
-	allpieces["LL"] = new piece;
-	allpieces["S"] = new piece;
-	allpieces["SS"] = new piece;
-	allpieces["N"] = new piece;
-
-};
-
-*/
 
 /*	TODO : Figure out what to do to make sure you don't move other
 pieces when your King is in Check*/
@@ -168,8 +145,51 @@ function removeCaptured(symb, player){
 };
 
 /* TODO : Figure out how to do promotions */
-function isValidPromotion() {
+function ValidPromotions(row, col, symbol, someBoard, player) {
+	var obj = {};
+	if (symbol.includes("Z") || symbol.includes("N")){
+		if (player === 1){
+			if (row === 2) {
+				obj = 
+					{isValid : true,
+					 ValidPromotions : ["N", "P", "L"]
+					};
+			} else if (row === 1){
+				obj = 
+					{isValid : true,
+					 ValidPromotions : ["N", "P", "L", "PP", "LL", "S"]
+					};
 
+			} else if (row === 0){
+				obj = 
+					{isValid : true,
+					 ValidPromotions : ["N", "P", "L", "PP", "LL", "S", "SS", "A", "R", "M"]
+					};
+			}
+		}
+		else if (player === 2){
+			if (row === 9) {
+				obj = 
+					{isValid : true,
+					 ValidPromotions : ["N", "P", "L"]
+					};
+			} else if (row === 10){
+				obj =  
+					{isValid : true,
+					 ValidPromotions : ["N", "P", "L", "PP", "LL", "S"]
+					};
+
+			} else if (row === 11){
+				onj = 
+					{isValid : true,
+					 ValidPromotions : ["N", "P", "L", "PP", "LL", "S", "SS", "A", "R", "M"]
+					};
+			}
+		}
+	}
+	else obj = {isValid : false};
+
+	return obj;
 };
 
 function checkForCheck(someBoard, player){
@@ -201,7 +221,7 @@ function checkForCheck(someBoard, player){
 /* 	FUNCTION PURPOSE - Finds out if the move is within the board
 
 	FUNCTION STATUS - WORKING AS INTENDED
-	*/
+*/
 
 	function withinBoard(someRow, someCol) {
 

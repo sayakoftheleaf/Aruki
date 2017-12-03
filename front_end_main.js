@@ -35,7 +35,7 @@ function highlightcontrol(square, selected, tempSquares){
 	var numcol = Number(Col);
 
 	if(captured != "#"){
-		console.log("here");
+		//console.log("here");
 		newsymb = computeEvolution(captured, row[numrow][numcol].symbol);
 		row[numrow][numcol].symbol = newsymb;
 		removeCaptured(captured, playermove);
