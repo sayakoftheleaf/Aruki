@@ -1,4 +1,10 @@
+// This variable keeps track of whether the opponent had previously clicked on
+// a piece from the captured pieces tray
+
 var captured = "#";
+
+// The variable that handles whose turn it is is declared in the game_engine
+// module, but can be used in this module. It's 'playermove'
 
 $(document).ready(function(){
 
@@ -6,8 +12,6 @@ $(document).ready(function(){
 	init_board();
 
 	setupBoard();
-	cssSquare();
-	refreshSquares(false);
 	putPieces(row);
 
 	var selected = {
@@ -16,7 +20,7 @@ $(document).ready(function(){
 		col : -1
 	};
 	var tempSquares = [];
-	
+
 	$(".Square").click(function(){
 		temp = highlightcontrol($(this), selected, tempSquares);
 		selected = temp[0];
@@ -26,25 +30,78 @@ $(document).ready(function(){
 });
 
 function highlightcontrol(square, selected, tempSquares){
+
+	// Extracting the Row and the Column number from the div classes of the
+	// clicked squares
+
 	var Row = square.parent().attr('class');
 	var Col = square.attr('class');
 	Row = Row.substring(3);
 	Col = Col.substring(10);
 
+	// Converting the extracted strings to actual numbers
 	var numrow = Number(Row);
 	var numcol = Number(Col);
 
 	if(captured != "#"){
-		//console.log("here");
+
+
 		newsymb = computeEvolution(captured, row[numrow][numcol].symbol);
-		row[numrow][numcol].symbol = newsymb;
-		removeCaptured(captured, playermove);
-		captured = "#";
-		refreshSquares(true);
-		putPieces(row);
-		refreshCaptured(capturedPieces, row);
-		flipplayermove();
-		return [selected, []];
+
+		// If the evolution is actually valid
+		if (newsymb != row[numrow][numcol].symbol){
+			// This prevents the player from evolving the opponent's pieces
+			if (row[numrow][numcol].player === playermove){
+				row[numrow][numcol].symbol = newsymb;
+
+				// This function is in game_engine
+				// removes the captured piece that is being used from the captured stack
+				removeCaptured(captured, playermove);
+				captured = "#";
+				flipplayermove();
+
+				// refreshing the UI
+				refreshSquares(true);
+				putPieces(row);
+				refreshCaptured(capturedPieces, row);
+				return [selected, []];
+			}
+				// This handles the cases when the player clicks on a captured piece
+				// and then clicks on the opponent's piece
+				else {
+					captured = "#";
+					selected.symbol = "#";
+					selected.row = -1;
+					selected.col = -1
+					return [selected, []];
+			}
+		}
+			// This handles cases when the player clicks on a piece in the captured
+			// pieces stack, but then does not click on a square with a piece.
+			// Here, if the square clicked was a move for the original piece, the
+			// game assumes that clicking on the captured piece was a misclick and
+			// moves the previous piece to the square.
+
+			else if (newsymb === "#"){
+				captured = "#";
+				highlightcontrol(square, selected, tempSquares);
+			}
+
+			// This handles cases when the evolution wasn't valid
+			// and therefore just ignores the captured piece selection
+			// and just considers the piece selected second for movement
+			else {
+				captured = "#";
+				console.log ("here bunny bunny");
+				selected.symbol = row[numrow][numcol].symbol;
+				selected.row = numrow;
+				selected.col = numcol;
+
+				refreshSquares(false);
+				tempSquares = computeMoves(selected.symbol, selected.row, selected.col, row);
+				highlightpieces(tempSquares);
+				return [selected, tempSquares];
+			}
 	}
 	else if(selected.symbol === "#"){
 		var symb = row[numrow][numcol].symbol;
@@ -61,35 +118,34 @@ function highlightcontrol(square, selected, tempSquares){
 		} else return [selected, tempSquares];
 	} else {
 		if (isValidMove(selected.symbol, selected.row, selected.col, numrow, numcol, row, tempSquares)){
-			makeNonCaptureMove (selected.row, selected.col, numrow, numcol, playermove, row);
-			selected.symbol = "#";
-			selected.row = -1;
-			selected.col = -1;
+				makeNonCaptureMove (selected.row, selected.col, numrow, numcol, playermove, row);
+				selected.symbol = "#";
+				selected.row = -1;
+				selected.col = -1;
 
-			flipplayermove();
+				flipplayermove();
 
-			refreshSquares(true);
-			refreshCaptured(capturedPieces, row);
-			putPieces(row);
-			return [selected, []];
+				refreshSquares(true);
+				refreshCaptured(capturedPieces, row);
+				putPieces(row);
+				return [selected, []];
 		} else if (row[numrow][numcol].symbol === "#"){
-			return [selected, []];
+				return [selected, []];
 		} else if (row[numrow][numcol].player === playermove){
+				selected.symbol = row[numrow][numcol].symbol;
+				selected.row = numrow;
+				selected.col = numcol;
 
-			selected.symbol = row[numrow][numcol].symbol;
-			selected.row = numrow;
-			selected.col = numcol;
-
-			refreshSquares(false);
-			tempSquares = computeMoves(selected.symbol, selected.row, selected.col, row);
-			highlightpieces(tempSquares);
-			return [selected, tempSquares];
+				refreshSquares(false);
+				tempSquares = computeMoves(selected.symbol, selected.row, selected.col, row);
+				highlightpieces(tempSquares);
+				return [selected, tempSquares];
 		} else {
-			refreshSquares(false);
-			selected.symbol = "#";
-			selected.row = -1;
-			selected.col = -1;
-			return [selected, []];
+				refreshSquares(false);
+				selected.symbol = "#";
+				selected.row = -1;
+				selected.col = -1;
+				return [selected, []];
 		}
 	}
 }
@@ -109,64 +165,26 @@ function setupBoard(){
 	}
 };
 
-function cssSquare(){
-	/*
-	$(".Game").css({
-		"display": "inline-block",
-		"vertical-align": "top",
-	});
-	*/
-	/*
-	$(".Captured").css({
-		"display" : "inline-block",
-		"margin-top": "50px",
-		"vertical-align": "top",
-		"margin-left": "20px",
-	});
-	*/
-	/*
-	$(".White").css({
-		"height" : "150px",
-		"width" : "250px",
-		"background-color" : "#BE9253",
-		"border" :  "4px solid #9F6614"
-	});
-	*/
-	/*
-	$(".Black").css({
-		"height" : "150px",
-		"width" : "250px",
-		"margin-bottom" : "100px",
-		"background-color" : "#BE9253",
-		"border" : "4px solid #9F6614"
-	});
-	*/
-	/*
-	$(".Board").css({
-		"line-height": "0px",
-		"background-image": "url(Files/Board_sample.png)",
-		"background-repeat": "no-repeat", 
-	});
-	*/
-	/*
-	$(".Square").css({
-		"border" : "4px solid #997E5A00",
-		"height":"48px",
-		"width":"48px",
-		"display":"inline-block",
-		"box-sizing": "border-box"
-	});
-	*/
+/* FUNCTION PURPOSE : refreshes the borders of each individual square after
+	every time mouse event.
 
-};
+	LOGIC : When a mouse click occurs, the background color of the squares the piece
+	can move to changes.
+	When another mouse event occurs, the background color of the previously colored
+	square reverts and if the player clicked on another piece then the same process
+	occurs again. If the player moved the previous pieces, then nothing more
+	happens after the revert.
+
+	FUNCTION STATUS : Working as intended
+*/
 
 function refreshSquares(deletenodes){
 	var rowflag = false;
 	for(var a = 0; a < 12; a++){
-		
+
 		if (rowflag)
 			color = true;
-		else 
+		else
 			color = false;
 
 		var classa = "Row" + a;
@@ -178,19 +196,14 @@ function refreshSquares(deletenodes){
 				$(divstring).css({"background-color": "#9F661400",
 					"border-color":"#9F661400"
 				});
-
-				if (deletenodes)
-					$(divstring).empty();
 			}
 			else {
 				$(divstring).css({"background-color":"#BE925300",
 					"border-color":"#BE925300"
 				});
-
-				if (deletenodes)
-					$(divstring).empty();
-
 			}
+			if (deletenodes)
+				$(divstring).empty();
 			color = !color
 		}
 		rowflag = !rowflag;
@@ -232,10 +245,9 @@ function refreshCaptured(CapturedPieces, someBoard){
 		} else if (clickedplayer === "Black" && playermove === 2){
 			console.log("changing captured2");
 			captured = capturedPieces.player2[temp];
-		}	
+		}
 	});
 };
-
 
 function putPieces(someBoard){
 	for(var row = 0 ; row < 12; row++){
@@ -249,16 +261,21 @@ function putPieces(someBoard){
 
 };
 
+/*
+		FUNCTION PURPOSE : draws each individual piece that is there during any state
+		of the board
+*/
+
 function drawPieces(classstr, symb, player, someBoard){
 
 	$(classstr).append("<div class=\"Piece\"></div>");
 	$(".Piece").css({
 		"height" : "32px",
-		"width":"32px", 
+		"width":"32px",
 	});
-	
+
 	$(classstr + " .Piece").addClass("player"+player);
-	
+
 	if(symb === "#"){
 		$(classstr).empty();
 	}
@@ -362,7 +379,7 @@ function drawPieces(classstr, symb, player, someBoard){
 		$(classstr + " .Piece").css({
 			"background-position" : "0 0",
 		});
-	}	
+	}
 	else if (symb.includes("R")){
 		if (player === 1){
 			$(classstr + " .Piece").css({

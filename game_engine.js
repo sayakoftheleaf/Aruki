@@ -22,8 +22,8 @@ function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, player, moveBoard) 
 
 	if (moveBoard[newrow][newcol].player != player && moveBoard[newrow][newcol].player != 0){
 		if (!
-			(moveBoard[newrow][newcol].symbol.includes("J") || 
-				moveBoard[newrow][newcol].symbol.includes("GR") || 
+			(moveBoard[newrow][newcol].symbol.includes("J") ||
+				moveBoard[newrow][newcol].symbol.includes("GR") ||
 				moveBoard[newrow][newcol].symbol.includes("LR") ||
 				moveBoard[newrow][newcol].symbol.includes("N") ||
 				moveBoard[newrow][newcol].symbol.includes("SS") ||
@@ -37,12 +37,12 @@ function makeNonCaptureMove (oldrow, oldcol, newrow, newcol, player, moveBoard) 
 				console.log(capturedPieces);
 			}
 		}
-	} 
+	}
 
 	moveBoard[newrow][newcol].player = moveBoard[oldrow][oldcol].player;
 	moveBoard[newrow][newcol].symbol = moveBoard[oldrow][oldcol].symbol;
 	moveBoard[oldrow][oldcol].player = 0;
-	moveBoard[oldrow][oldcol].symbol = "#";	
+	moveBoard[oldrow][oldcol].symbol = "#";
 };
 
 function removeCaptured(symb, player){
@@ -62,7 +62,7 @@ function removeCaptured(symb, player){
 
 /* 	TODO : Cancel out the moves that cause checks if they are actually played.*/
 
-/* 	TODO : Figure out if shouldCheck should actually be a thing. Right now it 
+/* 	TODO : Figure out if shouldCheck should actually be a thing. Right now it
 	looks a little unnecessary to me. Every time you check if a move is valid,
 	you check for checks.*/
 
@@ -93,7 +93,7 @@ function removeCaptured(symb, player){
 
 		if (!flag)
 			return false;
-		else 
+		else
 			return true;
 	};
 
@@ -114,8 +114,6 @@ function removeCaptured(symb, player){
 	};
 
 	function computeEvolution(symbol1, symbol2){
-		console.log("symbol1 is " + symbol1);
-		console.log("symbol2 is " + symbol2);
 	// greater pike evolution
 	if	(symbol1.includes("P") && symbol2.includes("P"))
 		return "PP";
@@ -142,26 +140,40 @@ function removeCaptured(symb, player){
 		return "MI";
 	else if (symbol1.includes("A") && symbol2.includes("R"))
 		return "MI";
+
+	// This is the default return if no valid evolutions are found
+	return symbol2;
 };
 
 /* TODO : Figure out how to do promotions */
+
+/*
+  FUNCTION PURPOSE - Returns all the valid promotions available when a pawn or
+	a Javelin reaches a specific Square
+
+	Input - present row, present column, the symbol of the piece,
+	the board, the player
+
+	FUNCTION STATUS - WORKING AS INTENDED
+*/
+
 function ValidPromotions(row, col, symbol, someBoard, player) {
 	var obj = {};
 	if (symbol.includes("Z") || symbol.includes("N")){
 		if (player === 1){
 			if (row === 2) {
-				obj = 
+				obj =
 					{isValid : true,
 					 ValidPromotions : ["N", "P", "L"]
 					};
 			} else if (row === 1){
-				obj = 
+				obj =
 					{isValid : true,
 					 ValidPromotions : ["N", "P", "L", "PP", "LL", "S"]
 					};
 
 			} else if (row === 0){
-				obj = 
+				obj =
 					{isValid : true,
 					 ValidPromotions : ["N", "P", "L", "PP", "LL", "S", "SS", "A", "R", "M"]
 					};
@@ -169,18 +181,18 @@ function ValidPromotions(row, col, symbol, someBoard, player) {
 		}
 		else if (player === 2){
 			if (row === 9) {
-				obj = 
+				obj =
 					{isValid : true,
 					 ValidPromotions : ["N", "P", "L"]
 					};
 			} else if (row === 10){
-				obj =  
+				obj =
 					{isValid : true,
 					 ValidPromotions : ["N", "P", "L", "PP", "LL", "S"]
 					};
 
 			} else if (row === 11){
-				onj = 
+				onj =
 					{isValid : true,
 					 ValidPromotions : ["N", "P", "L", "PP", "LL", "S", "SS", "A", "R", "M"]
 					};
@@ -191,6 +203,14 @@ function ValidPromotions(row, col, symbol, someBoard, player) {
 
 	return obj;
 };
+
+/*
+  FUNCTION PURPOSE - Finds out if the King is in check. Returns true if he is,
+	false otherwise.
+
+	FUNCTION STATUS - WORKING AS INTENDED
+*/
+
 
 function checkForCheck(someBoard, player){
 
@@ -218,7 +238,8 @@ function checkForCheck(someBoard, player){
 	return false;
 };
 
-/* 	FUNCTION PURPOSE - Finds out if the move is within the board
+/*
+  FUNCTION PURPOSE - Finds out if the move is within the board
 
 	FUNCTION STATUS - WORKING AS INTENDED
 */
@@ -235,14 +256,15 @@ function checkForCheck(someBoard, player){
 	};
 
 
-/*	
+/*
 	FUNCTION PURPOSE - Finds the position of a piece of a side and
 			returns an object comprised of the row and column.
 
 	RETURNTYPE : OBJECT
 
 	FUNCTION STATUS - WORKING AS INTENDED.
-	*/
+
+*/
 
 	function positionOf(symb, someBoard, player) {
 
@@ -252,7 +274,7 @@ function checkForCheck(someBoard, player){
 
 	for ( var a = 0; a <= 11; a++) {
 		for (var b = 0; b <= 11; b++) {
-			
+
 			if (someBoard[a][b].symbol.includes(symb) && player === someBoard[a][b].player){
 
 				tempSq.row = a;
@@ -265,7 +287,7 @@ function checkForCheck(someBoard, player){
 };
 
 function flipplayermove(){
-	if (playermove === 1) 
+	if (playermove === 1)
 		playermove = 2;
 	else if (playermove === 2)
 		playermove = 1;

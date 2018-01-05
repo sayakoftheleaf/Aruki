@@ -4,8 +4,8 @@ function interpretString(str)
 	if (!(str.search("Z") === -1)) {
 
 	} else if (!(str.search("L") === -1)) {
-		
-	} 
+
+	}
 }
 
 function interpretRow(char){
@@ -59,5 +59,5 @@ function interpretCol(number){
 	else if (number === 10)
 		return 1;
 	else if (number === 11)
-		return 0;	
+		return 0;
 }

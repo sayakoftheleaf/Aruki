@@ -12,10 +12,13 @@
 
 
 
-/* 	FUNCTION PURPOSE - Checks if the square in which the piece is trying to move to is 
+/*
+
+	FUNCTION PURPOSE - Checks if the square in which the piece is trying to move to is
 	occupied by a piece of the same side
 
-	FUNCTION STATUS - Probably bug free. UNTESTED.	
+	FUNCTION STATUS - Probably bug free. UNTESTED.
+
 */
 
 	function isNotBlockedSquare (r, c, tempr, tempc, someBoard) {
@@ -93,40 +96,40 @@ function computeKingMoves (r, c, player, someBoard){
 		tempr = r;
 		tempc = c - 1;
 		checkKing(r, c, tempr, tempc, tempSquares, player, someBoard);
-		
+
 		//case 2
 		tempr = r;
 		tempc = c + 1;
 		checkKing(r, c, tempr, tempc, tempSquares, player, someBoard);
-		
+
 
 		//case 3
 		tempr = r - 1;
 		tempc = c;
 		checkKing(r, c, tempr, tempc, tempSquares, player, someBoard);
-		
+
 
 		//case 4
 		tempr = r - 1;
 		tempc = c - 1;
 		checkKing(r, c, tempr, tempc, tempSquares, player, someBoard);
-		
+
 
 		//case 5
 		tempr = r - 1;
 		tempc = c + 1;
 		checkKing(r, c, tempr, tempc, tempSquares, player, someBoard);
-		
+
 		//case 6
 		tempr = r + 1;
 		tempc = c;
 		checkKing(r, c, tempr, tempc, tempSquares, player, someBoard);
-		
+
 		//case 7
 		tempr = r + 1;
 		tempc = c - 1;
 		checkKing(r, c, tempr, tempc, tempSquares, player, someBoard);
-		
+
 		//case 8
 		tempr = r + 1;
 		tempc = c + 1;
@@ -136,7 +139,7 @@ function computeKingMoves (r, c, player, someBoard){
 
 	};
 
-/* 
+/*
 	FUNCTION PURPOSE - Computes the moves of Pawns
 
 	FUNCTION STATUS - Working perfectly
@@ -148,7 +151,7 @@ function computeKingMoves (r, c, player, someBoard){
 		var tempr, tempc;
 		var blockedFlag;
 
-	// This is necessary because pawns can only move in one direction and this 
+	// This is necessary because pawns can only move in one direction and this
 	// direction differs depending on who is playing
 
 	if (player === 2){
@@ -156,7 +159,7 @@ function computeKingMoves (r, c, player, someBoard){
 		tempr = r + 1;
 		tempc = c;
 		blockedFlag = isNotBlockedSquare (r, c, tempr, tempc, someBoard);
-		
+
 		if (blockedFlag && withinBoard(tempr, tempc)){
 			pushSquares(tempr, tempc, tempSquares, player);
 		}
@@ -173,27 +176,30 @@ function computeKingMoves (r, c, player, someBoard){
 
 };
 
-/* 
+/*
 	FUNCTION PURPOSE - Calculates all the moves for the Jester
 
-  	FUNCTION STATUS - Logically very simple, so should be working when all the other pieces are working.
-  					- Still needs testing however
+  FUNCTION STATUS - Logically very simple, so should be working when all the other pieces are working.
+  						      UPDATE: Working as intended
 
 */
 
   function jesterCheck(r, c, tempr, tempc, someBoard){
-  	
+
   	var tsquares = [];
 
   	isWithinBoard = withinBoard(tempr, tempc);
 
   	if (isWithinBoard){
-  		if(!(someBoard[tempr][tempc].player === 0) && !((someBoard[tempr][tempc].symbol === "LR") || (someBoard[tempr][tempc].symbol === "GR"))){
-  			tsquares = tsquares.concat(computeMoves(someBoard[tempr][tempc].symbol, r, c, someBoard));
-  		}
-  	} 
-
-  	return tsquares; 
+  		if(!(someBoard[tempr][tempc].player === 0)) {
+				if(!((someBoard[tempr][tempc].symbol === "LR") || (someBoard[tempr][tempc].symbol === "GR"))){
+  				tsquares = tsquares.concat(computeMoves(someBoard[tempr][tempc].symbol, r, c, someBoard));
+  			} else if (someBoard[tempr][tempc].symbol === "LR" || someBoard[tempr][tempc].symbol === "GR"){
+						tsquares = tsquares.concat(computeKingMoves(r,c,someBoard[r][c].player, someBoard))
+					}
+  			}
+	 }
+  	return tsquares;
   };
 
   function computeJesterMoves (r, c, player, someBoard) {
@@ -212,7 +218,7 @@ function computeKingMoves (r, c, player, someBoard){
 	tempc = c;
 
 	tempSquares = tempSquares.concat(jesterCheck(r, c, tempr, tempc, someBoard));
-	
+
 	//Square to the top right diagonal
 	tempr = r + 1;
 	tempc = c - 1;
@@ -230,13 +236,13 @@ function computeKingMoves (r, c, player, someBoard){
 	tempc = c + 1;
 
 	tempSquares = tempSquares.concat(jesterCheck(r, c, tempr, tempc, someBoard));
-	
+
 	//Square to the right top right diagonal
 	tempr = r - 1;
 	tempc = c - 1;
 
 	tempSquares = tempSquares.concat(jesterCheck(r, c, tempr, tempc, someBoard));
-	
+
 	//Square to the bottom
 	tempr = r;
 	tempc = c + 1;
@@ -252,7 +258,7 @@ function computeKingMoves (r, c, player, someBoard){
 	return tempSquares;
 };
 
-/* 
+/*
 	FUNCTION PURPOSE - Computes the possible moves of the minister
 
 	FUNCTION STATUS - Works perfectly
@@ -261,7 +267,7 @@ function computeKingMoves (r, c, player, someBoard){
 	function computeMinisterMoves ( r, c, player, someBoard) {
 
 		var tempSquares = [];
-		var tempr, tempc; 
+		var tempr, tempc;
 
 		tempSquares = computeRookMoves(r,c, player, someBoard);
 		tempSquares = tempSquares.concat(computeArrowMoves(r,c, player, someBoard));
@@ -269,6 +275,16 @@ function computeKingMoves (r, c, player, someBoard){
 		return tempSquares;
 
 	};
+
+
+	/*
+		FUNCTION PURPOSE - Helper function that computes the moves for each of the individual sections
+		that the movements of the rook and arrow can be broken up into.
+
+	  FUNCTION STATUS - Logically very simple, so should be working when all the other pieces are working.
+	  						      UPDATE: Working as intended
+
+	*/
 
 	function RookArrowCheck(tempr, tempc, tempSquares, player, someBoard, flag){
 
@@ -293,6 +309,12 @@ function computeKingMoves (r, c, player, someBoard){
 	FUNCTION PURPOSE - Computes the possible moves of the Rook
 
 	FUNCTION STATUS - Works perfectly
+
+	LOGIC - Breaks the movement of the rook into four parts:
+					Upwards along the column
+					Downwards along the column
+					To the Right
+					To the Left
 */
 
 	function computeRookMoves ( r, c, player, someBoard) {
@@ -306,43 +328,57 @@ function computeKingMoves (r, c, player, someBoard){
 
 		for(var counter = 1; counter < 12; counter = counter + 1)
 		{
-			AscendingColFlag = RookArrowCheck(r, c + counter, tempSquares, player, someBoard, AscendingColFlag);
-			AscendingRowFlag = RookArrowCheck(r + counter, c, tempSquares, player, someBoard, AscendingRowFlag);
-			DescendingRowFlag = RookArrowCheck(r - counter, c, tempSquares, player, someBoard, DescendingRowFlag);
-			DescendingColFlag = RookArrowCheck(r, c - counter, tempSquares, player, someBoard, DescendingColFlag);
 
+			// Upwards along column for Black
+			// Downwards along the column for White
+			AscendingColFlag = RookArrowCheck(r, c + counter, tempSquares, player, someBoard, AscendingColFlag);
+			// Downwards along column for Black
+			// Upwards along the column for White
+			DescendingColFlag = RookArrowCheck(r, c - counter, tempSquares, player, someBoard, DescendingColFlag);
+			// Right along row
+			AscendingRowFlag = RookArrowCheck(r + counter, c, tempSquares, player, someBoard, AscendingRowFlag);
+			// Left along row
+			DescendingRowFlag = RookArrowCheck(r - counter, c, tempSquares, player, someBoard, DescendingRowFlag);
 		}
 
 		return tempSquares;
 	};
 
-/* 	FUNCTION PURPOSE - Calculates all the valid diagonal moves for an arrow
+/*
+		FUNCTION PURPOSE - Calculates all the valid diagonal moves for an arrow
 
-FUNCTION STATUS - Works perfectly
+		FUNCTION STATUS - Works perfectly
+
+		LOGIC - Divides the movement of the Arrows into four portions:
+							Upwards along the Right diagonal
+							Upwards along the Left diagonal
+							Downwards along the right diagonal
+							Downwards along the left diagonal
 
 */
 function computeArrowMoves (r, c, player, someBoard) {
 
 	var tempSquares = [];
-	
+
 	var AscendingRTFlag = true;
 	var AscendingRBFlag = true;
 	var DescendingLTFlag = true;
-	var DescendingLBFlag = true;	
+	var DescendingLBFlag = true;
 
 	// we can reuse the helper function for Rook because they behave the same way
 	for( var counter = 1; counter < 12; counter++){
+
 		AscendingRTFlag = RookArrowCheck(r + counter, c + counter, tempSquares, player, someBoard, AscendingRTFlag);
 		AscendingRBFlag = RookArrowCheck(r + counter, c - counter, tempSquares, player, someBoard, AscendingRBFlag);
 		DescendingLTFlag = RookArrowCheck(r - counter, c + counter, tempSquares, player, someBoard, DescendingLTFlag);
 		DescendingLBFlag = RookArrowCheck(r - counter, c - counter, tempSquares, player, someBoard, DescendingLBFlag);
 
 	}
-	
+
 	return tempSquares;
 };
 
-/* 
+/*
 
 	TODO : Compute the River Capturing Mechanism. Actually code all of the Rivers.
 
@@ -351,6 +387,8 @@ function computeArrowMoves (r, c, player, someBoard) {
 function computeGreaterRiverMoves (r, c, player, someBoard) {
 	return computeKingMoves(r, c, player, someBoard);
 }
+
+
 
 function computeGreaterRiverThreats (r, c, player, someBoard){
 	var tempSquares = [];
@@ -368,7 +406,6 @@ function GreaterRiverFlood (r, c, eliminate, someBoard){
 
 	for(var a = 0; a < 12 ; a++){
 		if(eliminate === "r"){
-			
 			someBoard[r][a].symbol = "#";
 			someBoard[r][a].symbol = "0";
 		} else if (eliminate === "c"){

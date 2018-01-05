@@ -1,0 +1,7 @@
+- FIXED :  When you move a captured piece into a piece it doesn't evolve into,
+everything fucks up
+- FIXED : You can evolve your opponent's pieces apparently
+- When you click on the captured stack after clicking on a piece, the piece that
+was previously selected gets deselected, but the borders don't go away.
+- FIXED : When you click on the captured stack but then on a piece on the board that
+you want to move, then the new piece doesn't get activated.
