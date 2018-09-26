@@ -2,13 +2,15 @@ function overrideBoard(someBoard, piecePositions){
     for (var a = 0; a < 12; a++){
         for (var b = 0; b < 12; b++){
           someBoard[a][b].symbol = "#";
-          someBoard[a][b].player = 0;  
-        } 
+          someBoard[a][b].player = 0;
+        }
     }
 
     for (var a = 0; a < piecePositions.length; a++){
-        someBoard[piecePositions[a].row][piecePositions[a].col].symbol = piecePositions[a].symbol;
-        someBoard[piecePositions[a].row][piecePositions[a].col].player = piecePositions[a].player;
+        let row = piecePositions[a].row
+        let col = piecePositions[a].col
+        someBoard[row][col].symbol = piecePositions[a].symbol;
+        someBoard[row][col].player = piecePositions[a].player;
     }
 }
 
