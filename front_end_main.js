@@ -12,7 +12,7 @@ $(document).ready(function(){
 	init_board();
 
 	setupBoard();
-	putPieces(row);
+	putPieces(row); 
 
 	var selected = {
 		symbol : "#",
